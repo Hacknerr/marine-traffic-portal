@@ -5,16 +5,20 @@ from tools import utilities
 from api.credentials import config
 
 
-# requests/collects the mmsi of all boats in a specific area from the api.
+# Requests and collects the mmsi of all ships in a specific area from the API.
 def data_request_of_area(token):
 
+    # Defines the API endpoint for fetching mmsi in a specific area.
     url = f"{config['api_historic_base_url']}/v1/historic/mmsiinarea"
+
+    # Defines the required headers for making the API request.
     headers = {
         'authorization': 'Bearer ' + token['access_token'],
         'content-type': 'application/json',
     }
 
-    # data struct necessary for tracking a geographical area
+    # Defines the data structure necessary for tracking a geographical area.
+    # The data structure contains a time range and a polygon that defines the geographical area.
     data_raw = {
         "msgtimefrom": utilities.format_datetime(utilities.get_datetime_2_hours_ago()),
         "msgtimeto": utilities.format_datetime(utilities.getCurrentTime()),
@@ -103,29 +107,49 @@ def data_request_of_area(token):
         }
     }
 
-    # attempts to make request.
+    # Attempts to make the API request and return the response data.
     try:
         response = requests.post(url, headers=headers, json=data_raw)
+
+        # Raises an error if the response status is not 200 (OK).
         response.raise_for_status()
+
+        # Loads the response data into a Python dictionary.
         data = json.loads(response.text)
+
+        # Checks if the response data is empty.
         if not data:
             print("No data received.")
+
+        # Returns the response data as a JSON object.
         return response.json()
+
     except requests.exceptions.HTTPError as err:
         print("Error: " + str(err))
 
 
-# collects the latest data of all vessels in the input list
+# Retrieves the latest data of all ships.
+# The token parameter is a dictionary containing the API access token for authorization.
+# list parameter is a list of MMSI numbers representing the ships for which to retrieve data.
 def get_data_from_mmsi(token, mmsi_list):
+
+    # Defines the API endpoint for retrieving the latest ship data.
     url = f"{config['api_base_url']}/v1/latest/combined"
+
+    # Sets the necessary headers for the API request.
     headers = {
         'authorization': 'Bearer ' + token['access_token'],
         'content-type': 'application/json',
     }
+
+    # Packages the list of MMSI numbers into the API request payload.
     data = {
         'mmsi': mmsi_list
     }
 
+    # Makes the API request and check for errors.
     response = requests.post(url, headers=headers, json=data)
     response.raise_for_status()
+
+    # Return the JSON formatted response from the API
     return response.json()
