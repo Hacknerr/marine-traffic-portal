@@ -8,7 +8,7 @@ from api import barentswatch, authentication
 from flask import Flask, jsonify
 
 
-# This function collects the MMSI values of all ships in a specific area from the Barentswatch API.
+# Collects the MMSI values of all ships in a specific area from the Barentswatch API.
 # The parameter token is required to access the Barentswatch API.
 def stub(token):
     # Collects the MMSI values of all ships in a specific area from the API.
@@ -20,7 +20,7 @@ def stub(token):
         serialization.json_to_file_area(collected_data)
 
 
-# This function extracts the latitude and longitude from a list of dictionaries.
+# Extracts the latitude and longitude from a list of dictionaries.
 # After that, it returns a list of coordinates.
 def get_coordinates_from_list_of_dicts(dict_list):
     coordinates = []
@@ -32,7 +32,7 @@ def get_coordinates_from_list_of_dicts(dict_list):
     return coordinates
 
 
-# This function adds markers to the Folium map based on the latitude and longitude
+# Adds markers to the Folium map based on the latitude and longitude
 def add_markers(m, coordinates_list):
     for coord in coordinates_list:
         folium.Marker(coord,
@@ -42,7 +42,7 @@ def add_markers(m, coordinates_list):
     return m
 
 
-# This function regenerates the map by updating the data displayed on it.
+# Regenerates the map by updating the data displayed on it.
 def regenerate_map():
     """
     The following steps are performed:
