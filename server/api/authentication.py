@@ -1,5 +1,5 @@
 import requests
-from server.api.credentials import config
+from api.credentials import config
 
 
 # retrieves an access token from a token URL using client credentials.
