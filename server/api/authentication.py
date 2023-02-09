@@ -2,15 +2,17 @@ import requests
 from api.credentials import config
 
 
-# retrieves an access token from a token URL using client credentials.
+# Obtains an authentication token from the API using the client ID and client secret.
 def get_token():
+
+    # Validate the presence of client_id and client_secret in the configuration.
     if not config['client_id']:
         raise ValueError('client_id must be set in credentials.py')
 
     if not config['client_secret']:
         raise ValueError('client_secret must be set in credentials.py')
 
-    # makes the request
+    # Makes the API request to retrieve the token.
     req = requests.post(config['token_url'],
                         data={
                             'grant_type': 'client_credentials',
@@ -20,12 +22,15 @@ def get_token():
                         },
                         headers={'content-type': 'application/x-www-form-urlencoded'})
 
+    # Raises an error if the request was unsuccessful.
     req.raise_for_status()
+
+    # Prints a success message and return the JSON response
     print('Token request successful')
     return req.json()
 
 
-# main method for validation testing the authentication
+# # Main method for validation testing of the authentication.
 if __name__ == "__main__":
     print(f"Requesting token from {config['token_url']}, using client_id {config['client_id']}.")
     token = get_token()
