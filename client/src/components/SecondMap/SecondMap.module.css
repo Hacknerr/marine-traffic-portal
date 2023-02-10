@@ -1,0 +1,20 @@
+/*
+The regular map shown but now in dark mode using filters
+ */
+.mapDark {
+    height: 100vh;
+    width: 100%;
+    display:flex;
+    align-content: center;
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+/*
+The regular map shown
+ */
+.map {
+    height: 70vh;
+    width: 93%;
+    display:flex;
+    margin-left: 80px;
+    margin-right:auto;
+}
