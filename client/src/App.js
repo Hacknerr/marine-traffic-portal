@@ -1,5 +1,5 @@
 // app.js
-import Map from "./components/map.js";
+import Map from "./components/Map/Map.jsx";
 
 function App() {
   return (
