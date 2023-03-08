@@ -25,8 +25,6 @@ def get_token():
     # Raises an error if the request was unsuccessful.
     req.raise_for_status()
 
-    # Prints a success message and return the JSON response
-    print('Token request successful')
     return req.json()
 
 
