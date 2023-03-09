@@ -1,7 +1,7 @@
 import time
 import threading
 
-from database import firestore
+from database import mongodb
 from api import barentswatch, authentication
 from flask import Flask, stream_with_context, Response
 from flask_socketio import SocketIO
@@ -53,7 +53,7 @@ def polling():
             json_response_with_data = []
 
         # Writes the JSON response with data to the database.
-        firestore.write_new_data_to_firestore(json_response_with_data)
+        mongodb.write_new_data_to_mongodb(json_response_with_data)
 
         print(fg.orange + 'SERVER: Polling successfully completed... Sleeping for 120 seconds...')
         time.sleep(120)
@@ -65,7 +65,7 @@ def send_data_to_frontend():
 
     def generate():
         while True:
-            data = firestore.read_latest_data_from_database()
+            data = mongodb.read_latest_data_from_database()
             yield 'data: %s\n\n' % data
             print(fg.orange + 'SERVER: Data streamed to frontend successfully. Sleeping for 30 seconds...')
             time.sleep(30)
@@ -79,7 +79,7 @@ def send_data_to_frontend():
 # The main function that starts the application
 if __name__ == "__main__":
     # Remove these lines of code when development is finished.
-    # firestore.delete_collections()
+    # mongodb.delete_collections()
     # time.sleep(300)
 
     # Create a thread for polling
