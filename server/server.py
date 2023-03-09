@@ -55,6 +55,9 @@ def polling():
         # Writes the JSON response with data to the database.
         mongodb.write_new_data_to_mongodb(json_response_with_data)
 
+        # Deletes documents from any collection if the "msgtime" field of the document is older than 7 days.
+        # mongodb.delete_old_documents()
+
         print(fg.orange + 'SERVER: Polling successfully completed... Sleeping for 120 seconds...')
         time.sleep(120)
 
@@ -79,7 +82,7 @@ def send_data_to_frontend():
 # The main function that starts the application
 if __name__ == "__main__":
     # Remove these lines of code when development is finished.
-    # mongodb.delete_collections()
+    # mongodb.delete_all_collections()
     # time.sleep(300)
 
     # Create a thread for polling
