@@ -4,6 +4,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
+import './Map.css';
 
 function Map() {
   const [ships, setShips] = useState([]);
@@ -74,7 +75,7 @@ const markers = ships
 
 
   return (
-    <MapContainer center={[63.48, 10.4]} zoom={10} style={{ height: '80vh', width: '50%' }}>
+    <MapContainer center={[63.48, 10.4]} zoom={10} style={{ height: '100vh', width: '100%' }}>
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {markers}
     </MapContainer>

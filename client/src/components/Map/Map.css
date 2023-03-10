@@ -1,0 +1,23 @@
+.leaflet-popup {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: #fff;
+  border-radius: 0;
+  box-shadow: 0 0 20px rgba(140, 103, 172, 0.3);
+}
+
+.leaflet-popup-content {
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 16px;
+  max-width: 300px;
+}
+
+.leaflet-popup h2 {
+  margin-bottom: 8px;
+  border-bottom: 1px solid #8C67AC;
+  padding-bottom: 8px;
+}
