@@ -56,7 +56,7 @@ const DrawerHeader = styled('div')(({theme}) => ({
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({theme, open}) => ({
-    backgroundColor: "purple",
+    background: `linear-gradient(to right, #8F00E3, #5A0196)`,
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
@@ -180,12 +180,6 @@ export default function Sidebar() {
                     ))}
                 </List>
             </Drawer>
-            <Box component="main" sx={{flexGrow: 1, p: 3}}>
-                <DrawerHeader/>
-                <Typography paragraph>
-                    This application is created by two students at NTNU in Gjøvik as their bachelor's thesis.
-                </Typography>
-            </Box>
         </Box>
     );
 }

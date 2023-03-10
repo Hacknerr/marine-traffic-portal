@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import './Map.css';
+import 'leaflet-rotatedmarker'
 
 function Map() {
   const [ships, setShips] = useState([]);
@@ -37,11 +38,14 @@ function Map() {
     }
   }, []);
 
-  const boatIcon = L.icon({
-    iconUrl: process.env.PUBLIC_URL + '/boat-icon.png',
-    iconSize: [32, 32],
-    iconAnchor: [16, 16],
-  });
+  var greenIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
 
 const markers = ships
   .filter((ship) => {
@@ -49,7 +53,7 @@ const markers = ships
     const currentTime = new Date();
     const diffInMinutes = Math.floor((currentTime - msgTime) / 1000 / 60);
 
-    return diffInMinutes < 15;
+    return diffInMinutes < 10;
   })
   .map((ship) => {
     const msgTime = new Date(ship.msgtime);
@@ -57,7 +61,7 @@ const markers = ships
     const diffInSeconds = Math.floor((currentTime - msgTime) / 1000);
 
     return (
-      <Marker key={ship.mmsi} position={[ship.latitude, ship.longitude]} icon={boatIcon}>
+      <Marker key={ship.mmsi} position={[ship.latitude, ship.longitude]} icon={greenIcon}>
         <Popup>
           <div>
             <h2>{ship.name}</h2>
@@ -76,7 +80,7 @@ const markers = ships
 
   return (
     <MapContainer center={[63.48, 10.4]} zoom={10} style={{ height: '100vh', width: '100%' }}>
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <TileLayer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
       {markers}
     </MapContainer>
   );
