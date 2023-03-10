@@ -8,8 +8,10 @@ import './Map.css';
 import 'leaflet-rotatedmarker'
 
 function Map() {
+  // Defines state variable
   const [ships, setShips] = useState([]);
 
+   // Sets up event source and handles incoming data
   useEffect(() => {
     const eventSource = new EventSource('http://localhost:5000/sse');
 
@@ -27,6 +29,7 @@ function Map() {
       }
     };
 
+    // Gets stored data from local storage
     const storedShips = localStorage.getItem('ships');
     if (storedShips) {
       try {
@@ -38,16 +41,18 @@ function Map() {
     }
   }, []);
 
-  var greenIcon = new L.Icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41]
-});
+  // Defines custom icon for markers
+  const greenIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
 
-const markers = ships
+  // Filter ships based on time difference and map them to markers
+  const markers = ships
   .filter((ship) => {
     const msgTime = new Date(ship.msgtime);
     const currentTime = new Date();
