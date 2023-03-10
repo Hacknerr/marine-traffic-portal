@@ -56,7 +56,7 @@ const DrawerHeader = styled('div')(({theme}) => ({
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({theme, open}) => ({
-    background: `linear-gradient(to right, #8F00E3, #5A0196)`,
+    background: `linear-gradient(to bottom right, #8F00E3, #5A0196)`,
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
@@ -119,7 +119,7 @@ export default function Sidebar() {
                         <MenuIcon/>
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Marine traffic portal
+                        Marine Traffic Portal
                     </Typography>
                 </Toolbar>
             </AppBar>

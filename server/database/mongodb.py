@@ -48,11 +48,12 @@ def delete_all_collections():
     print(fg.li_green + 'MONGODB: All collections successfully deleted from the database.')
 
 
+# Deletes old documents. Also deletes a collection if there's no document's in it.
 def delete_old_documents():
-    print(fg.li_green + 'MONGODB: Attempting to delete documents older than 3 days...')
+    print(fg.li_green + 'MONGODB: Attempting to delete documents older than 7 days...')
 
     # Calculate the datetime that was 3 minutes ago
-    three_minutes_ago = datetime.datetime.now() - datetime.timedelta(days=3)
+    three_minutes_ago = datetime.datetime.now() - datetime.timedelta(days=7)
     print(three_minutes_ago)
 
     # Iterate over all collections

@@ -55,35 +55,38 @@ def polling():
         # Writes the JSON response with data to the database.
         mongodb.write_new_data_to_mongodb(json_response_with_data)
 
-        # Deletes documents from any collection if the "msgtime" field of the document is older than 7 days.
-        # mongodb.delete_old_documents()
+        # Delete documents from any collection if the "msgtime" field of the document is older than 7 days.
+        mongodb.delete_old_documents()
 
         print(fg.orange + 'SERVER: Polling successfully completed... Sleeping for 120 seconds...')
-        time.sleep(120)
+        time.sleep(600)
 
 
+# Defines a Flask route for server-sent events
 @app.route('/sse')
 def send_data_to_frontend():
     print(fg.orange + 'SERVER: Streaming data to frontend...')
 
+    # Defines a generator function that will continually yield the latest data from the database
     def generate():
         while True:
             data = mongodb.read_latest_data_from_database()
+            # Sends the data to the frontend as a server-sent event,
+            # which consists of a data field followed by two newlines
             yield 'data: %s\n\n' % data
             print(fg.orange + 'SERVER: Data streamed to frontend successfully. Sleeping for 30 seconds...')
             time.sleep(30)
 
+    # Returns a Flask Response object that uses the generator function to stream data to the frontend
     return Response(stream_with_context(generate()), content_type='text/event-stream')
 
 
 # ¤-------------------------Startup-------------------------¤ #
 
-
 # The main function that starts the application
 if __name__ == "__main__":
     # Remove these lines of code when development is finished.
     # mongodb.delete_all_collections()
-    # time.sleep(300)
 
     # Create a thread for polling
     polling_thread = threading.Thread(target=polling)
