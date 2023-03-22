@@ -58,7 +58,7 @@ def polling():
         # Delete documents from any collection if the "msgtime" field of the document is older than 7 days.
         mongodb.delete_old_documents()
 
-        print(fg.orange + 'SERVER: Polling successfully completed... Sleeping for 120 seconds...')
+        print(fg.orange + 'SERVER: Polling successfully completed... Sleeping for 600 seconds...')
         time.sleep(600)
 
 

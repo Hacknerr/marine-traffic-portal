@@ -16,19 +16,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import DirectionsBoatFilledTwoToneIcon from '@mui/icons-material/DirectionsBoatFilledTwoTone';
 import LoopIcon from '@mui/icons-material/Loop';
 import InfoIcon from '@mui/icons-material/Info';
 import CopyrightIcon from '@mui/icons-material/Copyright';
 import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
 
 import Popover from '@mui/material/Popover';
-import Button from '@mui/material/Button';
-
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-
 import Map from "../Map/Map.jsx";
-
 
 const drawerWidth = 240;
 
@@ -100,7 +95,7 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
     }),
 );
 
-export default function Sidebar() {
+export default function Sidebar( {onLoopIconClick} ) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
@@ -187,6 +182,7 @@ export default function Sidebar() {
                 <List>
                     <ListItem key="Marine tracking" disablePadding sx={{display: 'block'}}>
                         <ListItemButton
+                            onClick={onLoopIconClick}
                             sx={{
                                 minHeight: 48,
                                 justifyContent: open ? 'initial' : 'center',
@@ -202,7 +198,7 @@ export default function Sidebar() {
                             >
                                 <LoopIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Marine tracking" sx={{opacity: open ? 1 : 0}} />
+                            <ListItemText primary="Toggle Carousel" sx={{opacity: open ? 1 : 0}} />
                         </ListItemButton>
                     </ListItem>
                     <ListItem key="Dark/light mode" disablePadding sx={{display: 'block'}}>
