@@ -1,23 +1,8 @@
-.leaflet-popup {
-  box-shadow: none;
-  border-radius: 0;
-}
 
-.leaflet-popup-content-wrapper {
-  background-color: #fff;
-  border-radius: 0;
-  box-shadow: 0 0 20px rgba(140, 103, 172, 0.3);
-}
-
-.leaflet-popup-content {
-  font-size: 14px;
-  line-height: 1.5;
-  padding: 16px;
-  max-width: 300px;
-}
-
-.leaflet-popup h2 {
-  margin-bottom: 8px;
-  border-bottom: 1px solid #8C67AC;
-  padding-bottom: 8px;
+.map-container {
+  height: calc(100vh - 64px); /* Subtract the height of the navbar, which is 64px by default */
+  width: calc(100% - 64px); /* Adjust this value according to your sidebar width */
+  position: absolute;
+  top: 64px; /* Set the top value to the height of the navbar */
+  left: 64px; /* Adjust this value according to your sidebar width */
 }

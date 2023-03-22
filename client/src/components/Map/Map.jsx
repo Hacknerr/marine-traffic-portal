@@ -1,10 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 import './Map.css';
+import './Popup.css';
+
+import 'leaflet-fullscreen/dist/Leaflet.fullscreen.js';
+import 'leaflet-fullscreen/dist/leaflet.fullscreen.css';
+
+function FullscreenControl() {
+  const map = useMap();
+
+  useEffect(() => {
+    map.addControl(new L.Control.Fullscreen());
+  }, [map]);
+
+  return null;
+}
 
 function Map() {
   // Defines state variables to store ship-data
@@ -88,12 +102,17 @@ function Map() {
 
   // This function renders the MapContainer component with the ship markers
   return (
-      // Create a MapContainer with a specified center, zoom level, and style
-      <MapContainer center={[63.48, 10.4]} zoom={10} style={{ height: '100vh', width: '100%' }}>
-        <TileLayer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
-        // Renders the markers on the map
-        {markers}
-      </MapContainer>
+      <div className="map-container">
+        <MapContainer
+            center={[63.48, 10.4]}
+            zoom={10}
+            style={{ height: '100%', width: '100%' }}
+        >
+          <TileLayer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
+          {markers}
+          <FullscreenControl />
+        </MapContainer>
+      </div>
   );
 }
 

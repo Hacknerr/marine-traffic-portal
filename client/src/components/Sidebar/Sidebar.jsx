@@ -17,9 +17,13 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DirectionsBoatFilledTwoToneIcon from '@mui/icons-material/DirectionsBoatFilledTwoTone';
+import LoopIcon from '@mui/icons-material/Loop';
 import InfoIcon from '@mui/icons-material/Info';
 import CopyrightIcon from '@mui/icons-material/Copyright';
 import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
+
+import Popover from '@mui/material/Popover';
+import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
 
@@ -56,7 +60,7 @@ const DrawerHeader = styled('div')(({theme}) => ({
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({theme, open}) => ({
-    background: `linear-gradient(to bottom right, #8F00E3, #8F00E3)`,
+    background: `linear-gradient(to right, #8F00E3, #5A0196)`,
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
@@ -101,10 +105,43 @@ export default function Sidebar() {
         setOpen(false);
     };
 
+    // Info Popup
+
+    const [infoPopoverOpen, setInfoPopoverOpen] = React.useState(false);
+    const [infoAnchorEl, setInfoAnchorEl] = React.useState(null);
+
+    const handleInfoPopoverOpen = (event) => {
+        setInfoAnchorEl(event.currentTarget);
+        setInfoPopoverOpen(true);
+    };
+
+    const handleInfoPopoverClose = () => {
+        setInfoAnchorEl(null);
+        setInfoPopoverOpen(false);
+    };
+
+
+
+    // Copyright Popup
+
+    const [popoverOpen, setPopoverOpen] = React.useState(false);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handlePopoverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+    setPopoverOpen(true);
+    };
+
+    const handlePopoverClose = () => {
+        setAnchorEl(null);
+        setPopoverOpen(false);
+    };
+
+
     return (
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
-            <AppBar position="fixed" open={open}>
+            <AppBar position="absolute" open={open}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -147,7 +184,7 @@ export default function Sidebar() {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {index % 2 === 0 ? <DirectionsBoatFilledTwoToneIcon/> : <DarkModeTwoToneIcon/>}
+                                    {index % 2 === 0 ? <LoopIcon/> : <DarkModeTwoToneIcon/>}
                                 </ListItemIcon>
                                 <ListItemText primary={text} sx={{opacity: open ? 1 : 0}}/>
                             </ListItemButton>
@@ -159,6 +196,7 @@ export default function Sidebar() {
                     {['Information', 'Copyright'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{display: 'block'}}>
                             <ListItemButton
+                                onClick={index % 2 === 0 ? handleInfoPopoverOpen : handlePopoverOpen}
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
@@ -180,6 +218,76 @@ export default function Sidebar() {
                     ))}
                 </List>
             </Drawer>
+
+                <Popover
+                    open={popoverOpen}
+                    anchorEl={anchorEl}
+                    onClose={handlePopoverClose}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: open ? 'left' : 'right',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                >
+                    <Box sx={{
+                        p: 2,
+                        width: '300px',
+                        height: '300px',
+                    }}>
+                        <Typography variant="body1">
+                            <p style={{
+                                fontSize: "14px",
+                                fontWeight: "bold",
+                            }}>
+                                Copyright © 2023 Martin Stene, André Gärtner, Accenture, and NTNU. All rights reserved.
+                            </p>
+                            <p style={{
+                                fontSize: "12px",
+                            }}>
+                                This web-application, including its design, code, functionality, and content, is the exclusive property of Martin Stene, André Gärtner, Accenture, and the Norwegian University of Science and Technology (NTNU). Unauthorized copying, reproduction, distribution, modification, display, or use of any portion of this web-application is strictly prohibited without the express written consent of the copyright holders.
+                            </p>
+                        </Typography>
+                    </Box>
+                </Popover>
+
+                <Popover
+                    open={infoPopoverOpen}
+                    anchorEl={infoAnchorEl}
+                    onClose={handleInfoPopoverClose}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: open ? 'left' : 'right',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                >
+                    <Box sx={{
+                        p: 2,
+                        width: '300px',
+                        height: 'auto',
+                    }}>
+                        <Typography variant="body1">
+                            <p style={{
+                                fontSize: "14px",
+                                fontWeight: "bold",
+                            }}>
+                                Information
+                            </p>
+                            <p style={{
+                                fontSize: "12px",
+                            }}>
+                                This Marine Traffic Portal provides real-time tracking and visualization of marine traffic. The data used in this portal comes from various sources, including AIS data providers, satellite tracking, and port authorities. Please note that the accuracy and reliability of the information provided may vary depending on the data source.
+                            </p>
+                        </Typography>
+                    </Box>
+                </Popover>
+
+
         </Box>
     );
 }
