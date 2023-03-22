@@ -7,13 +7,14 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import './Map.css';
 
 function Map() {
-  // Defines state variable
+  // Defines state variables to store ship-data
   const [ships, setShips] = useState([]);
 
-   // Sets up event source and handles incoming data
+   // Sets up event source for Server-Sent Events (SSE) and handles incoming data
   useEffect(() => {
     const eventSource = new EventSource('http://localhost:5000/sse');
 
+    // When a new message is received from SSE, update the state of the ships
     eventSource.onmessage = (event) => {
       console.log('EventSource.onmessage activated.');
       const data = event.data;
@@ -21,6 +22,7 @@ function Map() {
         const parsedData = JSON.parse(data);
         setShips(parsedData);
 
+        // Caches the latest ship-data in local storage
         console.log('Writing latest data to localstorage.');
         localStorage.setItem('ships', data);
       } catch (error) {
@@ -28,7 +30,7 @@ function Map() {
       }
     };
 
-    // Gets stored data from local storage
+    // Retrieves stored ship-data from local storage if available
     const storedShips = localStorage.getItem('ships');
     if (storedShips) {
       try {
@@ -40,7 +42,7 @@ function Map() {
     }
   }, []);
 
-  // Defines custom icon for markers
+  // Defines custom icons for the ship markers
   const greenIcon = new L.Icon({
     iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -50,13 +52,14 @@ function Map() {
     shadowSize: [41, 41]
   });
 
-  // Filter ships based on time difference and map them to markers
+  // Filters out ships based on time difference and maps them to markers
   const markers = ships
   .filter((ship) => {
     const msgTime = new Date(ship.msgtime);
     const currentTime = new Date();
     const diffInMinutes = Math.floor((currentTime - msgTime) / 1000 / 60);
 
+    // Only returns ships with data updated within the last 10 minutes
     return diffInMinutes < 10;
   })
   .map((ship) => {
@@ -64,6 +67,7 @@ function Map() {
     const currentTime = new Date();
     const diffInSeconds = Math.floor((currentTime - msgTime) / 1000);
 
+    // Creates markers for each ship with a popup containing ship information
     return (
       <Marker key={ship.mmsi} position={[ship.latitude, ship.longitude]} icon={greenIcon}>
         <Popup>
@@ -82,11 +86,14 @@ function Map() {
   });
 
 
+  // This function renders the MapContainer component with the ship markers
   return (
-    <MapContainer center={[63.48, 10.4]} zoom={10} style={{ height: '100vh', width: '100%' }}>
-      <TileLayer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
-      {markers}
-    </MapContainer>
+      // Create a MapContainer with a specified center, zoom level, and style
+      <MapContainer center={[63.48, 10.4]} zoom={10} style={{ height: '100vh', width: '100%' }}>
+        <TileLayer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
+        // Renders the markers on the map
+        {markers}
+      </MapContainer>
   );
 }
 
