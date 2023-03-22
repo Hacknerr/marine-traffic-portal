@@ -27,6 +27,8 @@ import Button from '@mui/material/Button';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
+import Map from "../Map/Map.jsx";
+
 
 const drawerWidth = 240;
 
@@ -155,6 +157,7 @@ export default function Sidebar() {
         <ThemeProvider theme={appTheme}>
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
+            <Map darkMode={darkMode} />
             <AppBar position="absolute" open={open} darkMode={darkMode}>
                 <Toolbar>
                     <IconButton
@@ -235,40 +238,6 @@ export default function Sidebar() {
             </Drawer>
 
                 <Popover
-                    open={popoverOpen}
-                    anchorEl={anchorEl}
-                    onClose={handlePopoverClose}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: open ? 'left' : 'right',
-                    }}
-                    transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                    }}
-                >
-                    <Box sx={{
-                        p: 2,
-                        width: '300px',
-                        height: '300px',
-                    }}>
-                        <Typography variant="body1">
-                            <p style={{
-                                fontSize: "14px",
-                                fontWeight: "bold",
-                            }}>
-                                Copyright © 2023 Martin Stene, André Gärtner, Accenture, and NTNU. All rights reserved.
-                            </p>
-                            <p style={{
-                                fontSize: "12px",
-                            }}>
-                                This web-application, including its design, code, functionality, and content, is the exclusive property of Martin Stene, André Gärtner, Accenture, and the Norwegian University of Science and Technology (NTNU). Unauthorized copying, reproduction, distribution, modification, display, or use of any portion of this web-application is strictly prohibited without the express written consent of the copyright holders.
-                            </p>
-                        </Typography>
-                    </Box>
-                </Popover>
-
-                <Popover
                     open={infoPopoverOpen}
                     anchorEl={infoAnchorEl}
                     onClose={handleInfoPopoverClose}
@@ -288,13 +257,13 @@ export default function Sidebar() {
                     }}>
                         <Typography variant="body1">
                             <p style={{
-                                fontSize: "14px",
+                                fontSize: "18px",
                                 fontWeight: "bold",
                             }}>
-                                Information
+                                About
                             </p>
                             <p style={{
-                                fontSize: "12px",
+                                fontSize: "14px",
                             }}>
                                 This Marine Traffic Portal provides real-time tracking and visualization of marine traffic. The data used in this portal comes from various sources, including AIS data providers, satellite tracking, and port authorities. Please note that the accuracy and reliability of the information provided may vary depending on the data source.
                             </p>
@@ -302,6 +271,39 @@ export default function Sidebar() {
                     </Box>
                 </Popover>
 
+                <Popover
+                    open={popoverOpen}
+                    anchorEl={anchorEl}
+                    onClose={handlePopoverClose}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: open ? 'left' : 'right',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                >
+                    <Box sx={{
+                        p: 2,
+                        width: '300px',
+                        height: 'auto',
+                    }}>
+                        <Typography variant="body1">
+                            <p style={{
+                                fontSize: "18px",
+                                fontWeight: "bold",
+                            }}>
+                                Copyright © 2023 Martin Stene, André Gärtner, Accenture, and NTNU. All rights reserved.
+                            </p>
+                            <p style={{
+                                fontSize: "14px",
+                            }}>
+                                This web-application, including its design, code, functionality, and content, is the exclusive property of Martin Stene, André Gärtner, Accenture, and the Norwegian University of Science and Technology (NTNU). Unauthorized copying, reproduction, distribution, modification, display, or use of any portion of this web-application is strictly prohibited without the express written consent of the copyright holders.
+                            </p>
+                        </Typography>
+                    </Box>
+                </Popover>
 
         </Box>
         </ThemeProvider>
