@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap , useRef} from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap} from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
@@ -74,7 +74,7 @@ function Map({ darkMode }) {
     const diffInMinutes = Math.floor((currentTime - msgTime) / 1000 / 60);
 
     // Only returns ships with data updated within the last 10 minutes
-    return diffInMinutes < 10;
+    return diffInMinutes < 15;
   })
   .map((ship) => {
     const msgTime = new Date(ship.msgtime);
