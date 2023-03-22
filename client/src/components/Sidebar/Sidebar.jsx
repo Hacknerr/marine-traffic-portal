@@ -185,29 +185,47 @@ export default function Sidebar() {
                 </DrawerHeader>
                 <Divider/>
                 <List>
-                    {['Marine tracking', 'Dark/light mode'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{display: 'block'}}>
-                            <ListItemButton
-                                onClick={() => setDarkMode(!darkMode)}
+                    <ListItem key="Marine tracking" disablePadding sx={{display: 'block'}}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
                                 sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center',
                                 }}
                             >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {index % 2 === 0 ? <LoopIcon/> : <DarkModeTwoToneIcon/>}
-                                </ListItemIcon>
-                                <ListItemText primary={text} sx={{opacity: open ? 1 : 0}}/>
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
+                                <LoopIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Marine tracking" sx={{opacity: open ? 1 : 0}} />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem key="Dark/light mode" disablePadding sx={{display: 'block'}}>
+                        <ListItemButton
+                            onClick={() => setDarkMode(!darkMode)}
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <DarkModeTwoToneIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="Dark/light mode" sx={{opacity: open ? 1 : 0}} />
+                        </ListItemButton>
+                    </ListItem>
                 </List>
                 <Divider/>
                 <List>
