@@ -25,6 +25,9 @@ import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
 import Popover from '@mui/material/Popover';
 import Button from '@mui/material/Button';
 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -58,9 +61,11 @@ const DrawerHeader = styled('div')(({theme}) => ({
 }));
 
 const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== 'open',
-})(({theme, open}) => ({
-    background: `linear-gradient(to right, #8F00E3, #5A0196)`,
+    shouldForwardProp: (prop) => prop !== 'open' && prop !== 'darkMode',
+})(({theme, open, darkMode}) => ({
+    background: darkMode
+      ? `linear-gradient(to right, #8F00E3, #5A0196)` // Color of the navbar when in dark mode
+      : `linear-gradient(to right, #8F00E3, #5A0196)`,
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
@@ -120,8 +125,6 @@ export default function Sidebar() {
         setInfoPopoverOpen(false);
     };
 
-
-
     // Copyright Popup
 
     const [popoverOpen, setPopoverOpen] = React.useState(false);
@@ -137,11 +140,22 @@ export default function Sidebar() {
         setPopoverOpen(false);
     };
 
+    // Dark mode
+
+    const [darkMode, setDarkMode] = React.useState(false);
+
+    const appTheme = createTheme({
+      palette: {
+        mode: darkMode ? 'dark' : 'light',
+      },
+    });
+
 
     return (
+        <ThemeProvider theme={appTheme}>
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
-            <AppBar position="absolute" open={open}>
+            <AppBar position="absolute" open={open} darkMode={darkMode}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -171,6 +185,7 @@ export default function Sidebar() {
                     {['Marine tracking', 'Dark/light mode'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{display: 'block'}}>
                             <ListItemButton
+                                onClick={() => setDarkMode(!darkMode)}
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
@@ -289,5 +304,6 @@ export default function Sidebar() {
 
 
         </Box>
+        </ThemeProvider>
     );
 }
