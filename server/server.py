@@ -95,4 +95,4 @@ if __name__ == "__main__":
     polling_thread.start()
 
     # Start the SocketIO server in the main thread
-    socketio.run(app, debug=True, host='127.0.0.1', allow_unsafe_werkzeug=True)
+    socketio.run(app, debug=True, host='127.0.0.1')
