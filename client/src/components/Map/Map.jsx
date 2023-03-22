@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap , useRef} from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
@@ -20,7 +20,7 @@ function FullscreenControl() {
   return null;
 }
 
-function Map() {
+function Map({ darkMode }) {
   // Defines state variables to store ship-data
   const [ships, setShips] = useState([]);
 
@@ -107,8 +107,9 @@ function Map() {
             center={[63.48, 10.4]}
             zoom={10}
             style={{ height: '100%', width: '100%' }}
+            zoomControl={false}
         >
-          <TileLayer url="http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"/>
+          <TileLayer url={darkMode ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png" : "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"} />
           {markers}
           <FullscreenControl />
         </MapContainer>
