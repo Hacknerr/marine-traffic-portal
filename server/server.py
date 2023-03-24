@@ -10,6 +10,8 @@ from flask_cors import CORS
 from sty import fg, bg, ef, rs
 from sty import Style, RgbFg
 
+from waitress import serve
+
 fg.orange = Style(RgbFg(255, 150, 50))
 
 # ¤-------------------------SocketIO-------------------------¤ #
@@ -94,5 +96,5 @@ if __name__ == "__main__":
     # Start the polling thread
     polling_thread.start()
 
-    # Start the SocketIO server in the main thread
-    socketio.run(app, debug=True, host='127.0.0.1')
+    # Start the Waitress server in the main thread
+    serve(app, host='127.0.0.1', port=5000)
