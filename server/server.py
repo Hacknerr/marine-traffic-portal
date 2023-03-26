@@ -37,6 +37,7 @@ def polling():
 
         # Collects authentication token for BarentsWatch API.
         token = authentication.get_token()
+        print(token)
 
         # Requests a list of MMSI numbers for boats in a certain area from the API.
         try:
@@ -88,7 +89,7 @@ def send_data_to_frontend():
 # The main function that starts the application
 if __name__ == "__main__":
     # Remove these lines of code when development is finished.
-    # mongodb.delete_all_collections()
+    mongodb.delete_all_collections()
 
     # Create a thread for polling
     polling_thread = threading.Thread(target=polling)

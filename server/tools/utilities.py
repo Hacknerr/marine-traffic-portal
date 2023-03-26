@@ -12,23 +12,29 @@ def getCurrentTime():
     # Gets the current date and time in the specified timezone
     current_datetime = datetime.now(tz=oslo_tz)
 
+    # Convert the datetime object to UTC timezone
+    current_datetime_utc = current_datetime.astimezone(pytz.UTC)
+
     # Returns the current date and time
-    return current_datetime
+    return format_datetime(current_datetime_utc)
 
 
 # This function calculates the datetime 2 hours ago from the current time
 def get_datetime_2_hours_ago():
     # Defines the local timezone as "Europe/Oslo"
-    local_timezone = pytz.timezone("Europe/Oslo")
+    oslo_tz = pytz.timezone("Europe/Oslo")
 
     # Gets the current datetime in the specified timezone
-    current_datetime = datetime.now(local_timezone)
+    current_datetime_two = datetime.now(tz=oslo_tz)
 
     # Calculates the datetime 2 hours ago from the current time
-    datetime_2_hours_ago = current_datetime - timedelta(hours=2)
+    datetime_2_hours_ago = current_datetime_two - timedelta(hours=2)
+
+    # Convert the datetime object to UTC timezone
+    datetime_2_hours_ago_utc = datetime_2_hours_ago.astimezone(pytz.UTC)
 
     # Returns the calculated datetime
-    return datetime_2_hours_ago
+    return format_datetime(datetime_2_hours_ago_utc)
 
 
 # This function takes in a datetime object and returns a string in the format "YYYY-MM-DDTHH:MM:SS+00:00"
