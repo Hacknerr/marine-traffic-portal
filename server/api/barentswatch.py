@@ -11,17 +11,25 @@ def data_request_of_area(token):
     # Defines the API endpoint for fetching mmsi in a specific area.
     url = f"{config['api_historic_base_url']}/v1/historic/mmsiinarea"
 
+    print(url)
+
     # Defines the required headers for making the API request.
     headers = {
         'authorization': 'Bearer ' + token['access_token'],
         'content-type': 'application/json',
     }
 
+    two_hours_ago = utilities.get_datetime_2_hours_ago()
+    now = utilities.getCurrentTime()
+
+    print(two_hours_ago)
+    print(now)
+
     # Defines the data structure necessary for tracking a geographical area.
     # The data structure contains a time range and a polygon that defines the geographical area.
     data_raw = {
-        "msgtimefrom": utilities.format_datetime(utilities.get_datetime_2_hours_ago()),
-        "msgtimeto": utilities.format_datetime(utilities.getCurrentTime()),
+        "msgtimefrom": two_hours_ago,
+        "msgtimeto": now,
         "polygon": {
             "coordinates": [
                 [
