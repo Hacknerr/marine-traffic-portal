@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./server
+    depends_on:
+      - mongodb
+    ports:
+      - '5000:5000'
+    networks:
+      - app-network
+
+  frontend:
+    build: ./client
+    ports:
+      - '80:80'
+    networks:
+      - app-network
+
+  mongodb:
+    image: 'mongo:4.4'
+    ports:
+      - '27017:27017'
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
