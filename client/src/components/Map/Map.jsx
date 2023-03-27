@@ -26,8 +26,8 @@ function Map({ darkMode }) {
 
    // Sets up event source for Server-Sent Events (SSE) and handles incoming data
   useEffect(() => {
-    // const eventSource = new EventSource('http://localhost:5000/sse');
-    const eventSource = new EventSource('http://10.212.173.142:5000/sse');
+    const eventSource = new EventSource('http://localhost:5000/sse');
+    //const eventSource = new EventSource('http://10.212.173.142:5000/sse');
 
     // When a new message is received from SSE, update the state of the ships
     eventSource.onmessage = (event) => {
@@ -58,7 +58,7 @@ function Map({ darkMode }) {
   }, []);
 
   // Defines custom icons for the ship markers
-  const greenIcon = new L.Icon({
+  const purpleIcon = new L.Icon({
     iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
     iconSize: [25, 41],
@@ -84,8 +84,8 @@ function Map({ darkMode }) {
 
     // Creates markers for each ship with a popup containing ship information
     return (
-      <Marker key={ship.mmsi} position={[ship.latitude, ship.longitude]} icon={greenIcon}>
-        <Popup>
+      <Marker key={ship.mmsi} position={[ship.latitude, ship.longitude]} icon={purpleIcon}>
+        <Popup className={darkMode ? 'custom-popup' : ''}>
           <div>
             <h2>{ship.name}</h2>
             <p>MMSI: {ship.mmsi}</p>
