@@ -20,6 +20,18 @@ function FullscreenControl() {
   return null;
 }
 
+// Carousel
+
+function PanToMarker({ position }) {
+  const map = useMap();
+
+  useEffect(() => {
+    map.panTo(position);
+  }, [position]);
+
+  return null;
+}
+
 function Map({ darkMode }) {
   // Defines state variables to store ship-data
   const [ships, setShips] = useState([]);
@@ -55,6 +67,20 @@ function Map({ darkMode }) {
         return shipTypeNumber.toString();
     }
   }
+
+  // Carousel
+  const [activeMarkerIndex, setActiveMarkerIndex] = useState(0);
+  useEffect(() => {
+    if (ships.length > 0) {
+      const interval = setInterval(() => {
+        setActiveMarkerIndex((prevIndex) => (prevIndex + 1) % ships.length);
+      }, 2000);
+
+      return () => clearInterval(interval);
+    }
+  }, [ships]);
+
+
 
    // Sets up event source for Server-Sent Events (SSE) and handles incoming data
   useEffect(() => {
@@ -132,12 +158,14 @@ function Map({ darkMode }) {
     );
   });
 
+  // Carousel
+  const markerPositions = markers.map((marker) => [marker.props.position[0], marker.props.position[1]]);
 
   // This function renders the MapContainer component with the ship markers
   return (
       <div className="map-container">
         <MapContainer
-            center={[63.48, 10.4]}
+            center={markerPositions.length > 0 ? markerPositions[0] : [73.48, 10.4]}
             zoom={10}
             style={{ height: '100%', width: '100%' }}
             zoomControl={false}
@@ -145,6 +173,9 @@ function Map({ darkMode }) {
           <TileLayer url={darkMode ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png" : "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"} />
           {markers}
           <FullscreenControl />
+          {ships.length > 0 && (
+          <PanToMarker position={[ships[activeMarkerIndex].latitude, ships[activeMarkerIndex].longitude]} />
+        )}
         </MapContainer>
       </div>
   );
