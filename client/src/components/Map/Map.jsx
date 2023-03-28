@@ -147,11 +147,11 @@ function Map({ darkMode }) {
           <div>
             <h2>{ship.name}</h2>
             <p>MMSI: {ship.mmsi}</p>
-            <p>Ship Type: {getShipTypeText(ship.shipType)}</p>
-            <p>Speed: {ship.speedOverGround === 0 ? 'None' : `${ship.speedOverGround} knots`}</p>
-            <p>Heading: {ship.trueHeading === null ? 'None' : `${ship.trueHeading}°`}</p>
-            <p>Course: {ship.courseOverGround == null ? 'None' : (ship.courseOverGround === 0 ? 'None' : `${ship.courseOverGround}°`)}</p>
-            <p>Last update: {diffInSeconds < 15 ? 'Now' : diffInSeconds < 60 ? `${diffInSeconds} seconds ago` : `${Math.floor(diffInSeconds / 60)} minute${Math.floor(diffInSeconds / 60) > 1 ? 's' : ''} ago`}</p>
+            <p>Skipstype: {getShipTypeText(ship.shipType)}</p>
+            <p>Fart: {ship.speedOverGround === 0 ? 'Ingen' : `${ship.speedOverGround} knots`}</p>
+            <p>Stevning: {ship.trueHeading === null ? 'Ingen' : `${ship.trueHeading}°`}</p>
+            <p>Kurs: {ship.courseOverGround == null ? 'Ingen' : (ship.courseOverGround === 0 ? 'Ingen' : `${ship.courseOverGround}°`)}</p>
+            <p>Sist oppdatert: {diffInSeconds < 15 ? 'Nå' : diffInSeconds < 60 ? `${diffInSeconds} sekunder siden` : `${Math.floor(diffInSeconds / 60)} minutt${Math.floor(diffInSeconds / 60) > 1 ? 'er' : ''} siden`}</p>
           </div>
         </Popup>
       </Marker>
