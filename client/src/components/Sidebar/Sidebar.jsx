@@ -16,7 +16,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import LoopIcon from '@mui/icons-material/Loop';
+import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
 import InfoIcon from '@mui/icons-material/Info';
 import CopyrightIcon from '@mui/icons-material/Copyright';
 import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
@@ -196,7 +196,7 @@ export default function Sidebar( {onLoopIconClick} ) {
                                     justifyContent: 'center',
                                 }}
                             >
-                                <LoopIcon />
+                                <ViewCarouselIcon />
                             </ListItemIcon>
                             <ListItemText primary="Toggle Carousel" sx={{opacity: open ? 1 : 0}} />
                         </ListItemButton>
