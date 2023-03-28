@@ -27,6 +27,9 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import Popover from '@mui/material/Popover';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Map from "../Map/Map.jsx";
+import './Sidebar.css'
+
+import { useState, useEffect } from 'react';
 
 const drawerWidth = 240;
 
@@ -150,6 +153,16 @@ export default function Sidebar( {onLoopIconClick} ) {
       },
     });
 
+    // Clock
+
+    const [currentTime, setCurrentTime] = useState(new Date());
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentTime(new Date());
+        }, 1000);
+        return () => clearInterval(timer);
+    }, []);
+
 
     return (
         <ThemeProvider theme={appTheme}>
@@ -247,10 +260,26 @@ export default function Sidebar( {onLoopIconClick} ) {
                                 >
                                     {index % 2 === 0 ? <InfoIcon/> : <CopyrightIcon/>}
                                 </ListItemIcon>
-                                <ListItemText secondary={text} sx={{opacity: open ? 1 : 0}}/>
+                                <ListItemText secondary={text} sx={{
+                                    opacity: open ? 1 : 0}}/>
                             </ListItemButton>
                         </ListItem>
                     ))}
+                </List>
+                <Divider/>
+                <List>
+                    <ListItem sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <ListItemText
+                            secondaryTypographyProps={{ sx: { fontSize: 10 } }}
+                            primary={currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            secondary={currentTime.toLocaleDateString()}
+                            sx={{
+                                opacity: open ? 1 : 1,
+                                color: (theme) => theme.palette.text.secondary,
+                                textAlign: 'center',
+                            }}
+                        />
+                    </ListItem>
                 </List>
             </Drawer>
 
