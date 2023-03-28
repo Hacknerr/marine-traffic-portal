@@ -93,7 +93,7 @@ function Map({ darkMode }) {
             <p>Speed: {ship.speedOverGround === 0 ? 'None' : `${ship.speedOverGround} knots`}</p>
             <p>Heading: {ship.trueHeading === null ? 'None' : `${ship.trueHeading}°`}</p>
             <p>Course: {ship.courseOverGround === 0 ? 'None' : `${ship.courseOverGround}°`}</p>
-            <p>Last update: {diffInSeconds < 15 ? 'Now' : `${diffInSeconds} seconds ago`}</p>
+            <p>Last update: {diffInSeconds < 15 ? 'Now' : diffInSeconds < 60 ? `${diffInSeconds} seconds ago` : `${Math.floor(diffInSeconds / 60)} minute${Math.floor(diffInSeconds / 60) > 1 ? 's' : ''} ago`}</p>
           </div>
         </Popup>
       </Marker>
