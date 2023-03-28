@@ -163,7 +163,6 @@ export default function Sidebar( {onLoopIconClick} ) {
         return () => clearInterval(timer);
     }, []);
 
-
     return (
         <ThemeProvider theme={appTheme}>
         <Box sx={{display: 'flex'}}>
