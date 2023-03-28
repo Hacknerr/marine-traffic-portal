@@ -21,6 +21,9 @@ import InfoIcon from '@mui/icons-material/Info';
 import CopyrightIcon from '@mui/icons-material/Copyright';
 import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
 
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+
+
 import Popover from '@mui/material/Popover';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Map from "../Map/Map.jsx";
@@ -217,7 +220,7 @@ export default function Sidebar( {onLoopIconClick} ) {
                                     justifyContent: 'center',
                                 }}
                             >
-                                <DarkModeTwoToneIcon />
+                                {darkMode ? <WbSunnyIcon /> : <DarkModeTwoToneIcon />}
                             </ListItemIcon>
                             <ListItemText primary="Dark/light mode" sx={{opacity: open ? 1 : 0}} />
                         </ListItemButton>
