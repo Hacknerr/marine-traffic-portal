@@ -213,7 +213,7 @@ export default function Sidebar( {onLoopIconClick} ) {
                             >
                                 <ViewCarouselIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Toggle Carousel" sx={{opacity: open ? 1 : 0}} />
+                            <ListItemText primary="Karusellmodus" sx={{opacity: open ? 1 : 0}} />
                         </ListItemButton>
                     </ListItem>
                     <ListItem key="Dark/light mode" disablePadding sx={{display: 'block'}}>
@@ -234,13 +234,13 @@ export default function Sidebar( {onLoopIconClick} ) {
                             >
                                 {darkMode ? <WbSunnyIcon /> : <DarkModeTwoToneIcon />}
                             </ListItemIcon>
-                            <ListItemText primary="Dark/light mode" sx={{opacity: open ? 1 : 0}} />
+                            <ListItemText primary="Mørk/lys modus" sx={{opacity: open ? 1 : 0}} />
                         </ListItemButton>
                     </ListItem>
                 </List>
                 <Divider/>
                 <List>
-                    {['Information', 'Copyright'].map((text, index) => (
+                    {['Informasjon', 'Opphavsrett'].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{display: 'block'}}>
                             <ListItemButton
                                 onClick={index % 2 === 0 ? handleInfoPopoverOpen : handlePopoverOpen}
@@ -306,12 +306,12 @@ export default function Sidebar( {onLoopIconClick} ) {
                                 fontSize: "18px",
                                 fontWeight: "bold",
                             }}>
-                                About
+                                Informasjon
                             </p>
                             <p style={{
                                 fontSize: "14px",
                             }}>
-                                This Marine Traffic Portal provides real-time tracking and visualization of marine traffic. The data used in this portal comes from various sources, including AIS data providers, satellite tracking, and port authorities. Please note that the accuracy and reliability of the information provided may vary depending on the data source.
+                                Denne maritime trafikkportalen gir sanntidssporing og visualisering av sjøtrafikk. Dataene som brukes i denne portalen kommer fra ulike kilder, inkludert AIS-dataleverandører, satellittsporing og havnemyndigheter. Vær oppmerksom på at nøyaktigheten og påliteligheten til informasjonen som gis kan variere avhengig av datakilden.
                             </p>
                         </Typography>
                     </Box>
@@ -340,12 +340,12 @@ export default function Sidebar( {onLoopIconClick} ) {
                                 fontSize: "18px",
                                 fontWeight: "bold",
                             }}>
-                                Copyright © 2023 Martin Stene, André Gärtner, Accenture, and NTNU. All rights reserved.
+                                Copyright © 2023 Martin Stene, André Gärtner, Accenture og NTNU. Alle rettigheter forbeholdt.
                             </p>
                             <p style={{
                                 fontSize: "14px",
                             }}>
-                                This web-application, including its design, code, functionality, and content, is the exclusive property of Martin Stene, André Gärtner, Accenture, and the Norwegian University of Science and Technology (NTNU). Unauthorized copying, reproduction, distribution, modification, display, or use of any portion of this web-application is strictly prohibited without the express written consent of the copyright holders.
+                                Denne nettapplikasjonen, inkludert design, kode, funksjonalitet og innhold, er den eksklusive eiendommen til Martin Stene, André Gärtner, Accenture og Norges teknisk-naturvitenskapelige universitet (NTNU). Uautorisert kopiering, reproduksjon, distribusjon, modifikasjon, visning eller bruk av noen del av denne nettapplikasjonen er strengt forbudt uten uttrykkelig skriftlig samtykke fra opphavsrettsinnehaverne.
                             </p>
                         </Typography>
                     </Box>
