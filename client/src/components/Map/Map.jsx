@@ -24,6 +24,38 @@ function Map({ darkMode }) {
   // Defines state variables to store ship-data
   const [ships, setShips] = useState([]);
 
+  // Defines function to map ship type number to corresponding text
+  function getShipTypeText(shipTypeNumber) {
+    switch (shipTypeNumber) {
+      case 38:
+        return 'Reservert';
+      case 40:
+        return 'Høyhastighetsfartøy';
+      case 50:
+        return 'Losbåt';
+      case 51:
+        return 'Redningsskøyte';
+      case 52:
+        return 'Taubåt';
+      case 59:
+        return 'Spesialfartøy';
+      case 60:
+        return 'Passasjerfartøy';
+      case 69:
+        return 'Passasjerfartøy';
+      case 70:
+        return 'Fraktefartøy';
+      case 80:
+        return 'Tankskip';
+      case 90:
+        return 'Annen fartøytype';
+      case 99:
+        return 'Annen fartøytype';
+      default:
+        return shipTypeNumber.toString();
+    }
+  }
+
    // Sets up event source for Server-Sent Events (SSE) and handles incoming data
   useEffect(() => {
     const eventSource = new EventSource('http://localhost:5000/sse');
@@ -89,7 +121,7 @@ function Map({ darkMode }) {
           <div>
             <h2>{ship.name}</h2>
             <p>MMSI: {ship.mmsi}</p>
-            <p>Ship Type: {ship.shipType}</p>
+            <p>Ship Type: {getShipTypeText(ship.shipType)}</p>
             <p>Speed: {ship.speedOverGround === 0 ? 'None' : `${ship.speedOverGround} knots`}</p>
             <p>Heading: {ship.trueHeading === null ? 'None' : `${ship.trueHeading}°`}</p>
             <p>Course: {ship.courseOverGround === 0 ? 'None' : `${ship.courseOverGround}°`}</p>
