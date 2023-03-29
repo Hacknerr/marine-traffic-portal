@@ -21,7 +21,6 @@ function FullscreenControl() {
 }
 
 // Carousel
-
 function PanToMarker({ position, isActive }) {
   const map = useMap();
 
@@ -33,7 +32,6 @@ function PanToMarker({ position, isActive }) {
 
   return null;
 }
-
 
 function Map({ darkMode, isCarouselActive }) {
   // Defines state variables to store ship-data
@@ -84,9 +82,7 @@ function Map({ darkMode, isCarouselActive }) {
     }
   }, [ships, isCarouselActive]);
 
-
-
-   // Sets up event source for Server-Sent Events (SSE) and handles incoming data
+  // Sets up event source for Server-Sent Events (SSE) and handles incoming data
   useEffect(() => {
     const eventSource = new EventSource('http://localhost:5000/sse');
     //const eventSource = new EventSource('http://10.212.173.142:5000/sse');
