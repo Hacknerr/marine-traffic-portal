@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -36,6 +36,8 @@ function PanToMarker({ position, isActive }) {
 function Map({ darkMode, isCarouselActive }) {
   // Defines state variables to store ship-data
   const [ships, setShips] = useState([]);
+
+  const markerRefs = useRef([]);
 
   // Defines function to map ship type number to corresponding text
   function getShipTypeText(shipTypeNumber) {
@@ -75,12 +77,24 @@ function Map({ darkMode, isCarouselActive }) {
   useEffect(() => {
     if (isCarouselActive && ships.length > 0) {
       const interval = setInterval(() => {
+        // Close the popup of the previous marker
+        if (markerRefs.current[activeMarkerIndex]) {
+          markerRefs.current[activeMarkerIndex].closePopup()
+        }
+
         setActiveMarkerIndex((prevIndex) => (prevIndex + 1) % ships.length);
       }, 2000);
 
       return () => clearInterval(interval);
     }
-  }, [ships, isCarouselActive]);
+  }, [ships, isCarouselActive, activeMarkerIndex]);
+
+  // Open the popup for the active marker when activeMarkerIndex changes
+  useEffect(() => {
+    if (markerRefs.current[activeMarkerIndex]) {
+      markerRefs.current[activeMarkerIndex].openPopup();
+    }
+  }, [activeMarkerIndex]);
 
   // Sets up event source for Server-Sent Events (SSE) and handles incoming data
   useEffect(() => {
@@ -135,14 +149,23 @@ function Map({ darkMode, isCarouselActive }) {
     // Only returns ships with data updated within the last 10 minutes
     return diffInMinutes < 15;
   })
-  .map((ship) => {
+  .map((ship, index) => {
     const msgTime = new Date(ship.msgtime);
     const currentTime = new Date();
     const diffInSeconds = Math.floor((currentTime - msgTime) / 1000);
 
     // Creates markers for each ship with a popup containing ship information
     return (
-      <Marker key={ship.mmsi} position={[ship.latitude, ship.longitude]} icon={purpleIcon}>
+      <Marker
+          key={ship.mmsi}
+          position={[ship.latitude, ship.longitude]}
+          icon={purpleIcon}
+          ref={(marker) => {
+            if (marker) {
+              markerRefs.current[index] = marker;
+            }
+          }}
+      >
         <Popup className={darkMode ? 'custom-popup' : ''}>
           <div>
             <h2>{ship.name}</h2>
