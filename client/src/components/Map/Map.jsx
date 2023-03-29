@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap} from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
@@ -22,17 +22,20 @@ function FullscreenControl() {
 
 // Carousel
 
-function PanToMarker({ position }) {
+function PanToMarker({ position, isActive }) {
   const map = useMap();
 
   useEffect(() => {
-    map.panTo(position);
-  }, [position]);
+    if (isActive) {
+      map.panTo(position);
+    }
+  }, [position, isActive]);
 
   return null;
 }
 
-function Map({ darkMode }) {
+
+function Map({ darkMode, isCarouselActive }) {
   // Defines state variables to store ship-data
   const [ships, setShips] = useState([]);
 
@@ -70,15 +73,16 @@ function Map({ darkMode }) {
 
   // Carousel
   const [activeMarkerIndex, setActiveMarkerIndex] = useState(0);
+
   useEffect(() => {
-    if (ships.length > 0) {
+    if (isCarouselActive && ships.length > 0) {
       const interval = setInterval(() => {
         setActiveMarkerIndex((prevIndex) => (prevIndex + 1) % ships.length);
       }, 2000);
 
       return () => clearInterval(interval);
     }
-  }, [ships]);
+  }, [ships, isCarouselActive]);
 
 
 
@@ -165,7 +169,7 @@ function Map({ darkMode }) {
   return (
       <div className="map-container">
         <MapContainer
-            center={markerPositions.length > 0 ? markerPositions[0] : [73.48, 10.4]}
+            center={markerPositions.length > 0 ? markerPositions[0] : [63.48, 10.4]}
             zoom={10}
             style={{ height: '100%', width: '100%' }}
             zoomControl={false}
@@ -173,8 +177,8 @@ function Map({ darkMode }) {
           <TileLayer url={darkMode ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png" : "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"} />
           {markers}
           <FullscreenControl />
-          {ships.length > 0 && (
-          <PanToMarker position={[ships[activeMarkerIndex].latitude, ships[activeMarkerIndex].longitude]} />
+          {markers.length > 0 && (
+          <PanToMarker position={[ships[activeMarkerIndex].latitude, ships[activeMarkerIndex].longitude]} isActive={isCarouselActive} />
         )}
         </MapContainer>
       </div>

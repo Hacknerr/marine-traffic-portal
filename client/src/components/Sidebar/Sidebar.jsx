@@ -114,7 +114,6 @@ export default function Sidebar( {onLoopIconClick} ) {
     };
 
     // Info Popup
-
     const [infoPopoverOpen, setInfoPopoverOpen] = React.useState(false);
     const [infoAnchorEl, setInfoAnchorEl] = React.useState(null);
 
@@ -129,7 +128,6 @@ export default function Sidebar( {onLoopIconClick} ) {
     };
 
     // Copyright Popup
-
     const [popoverOpen, setPopoverOpen] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -144,7 +142,6 @@ export default function Sidebar( {onLoopIconClick} ) {
     };
 
     // Dark mode
-
     const [darkMode, setDarkMode] = React.useState(false);
 
     const appTheme = createTheme({
@@ -154,7 +151,6 @@ export default function Sidebar( {onLoopIconClick} ) {
     });
 
     // Clock
-
     const [currentTime, setCurrentTime] = useState(new Date());
     useEffect(() => {
         const timer = setInterval(() => {
@@ -163,11 +159,17 @@ export default function Sidebar( {onLoopIconClick} ) {
         return () => clearInterval(timer);
     }, []);
 
+    // Carousel toggle
+    const [isCarouselActive, setIsCarouselActive] = useState(false);
+    const toggleCarousel = () => {
+        setIsCarouselActive((prevState) => !prevState);
+    };
+
     return (
         <ThemeProvider theme={appTheme}>
         <Box sx={{display: 'flex'}}>
             <CssBaseline/>
-            <Map darkMode={darkMode} />
+            <Map darkMode={darkMode} isCarouselActive={isCarouselActive}/>
             <AppBar position="absolute" open={open} darkMode={darkMode}>
                 <Toolbar>
                     <IconButton
@@ -210,6 +212,7 @@ export default function Sidebar( {onLoopIconClick} ) {
                                     mr: open ? 3 : 'auto',
                                     justifyContent: 'center',
                                 }}
+                                onClick={toggleCarousel}
                             >
                                 <ViewCarouselIcon />
                             </ListItemIcon>
