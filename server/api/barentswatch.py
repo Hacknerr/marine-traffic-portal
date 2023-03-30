@@ -27,7 +27,7 @@ def data_request_of_area(token):
 
     # Defines the data structure necessary for tracking a geographical area.
     # The data structure contains a time range and a polygon that defines the geographical area.
-    data_raw = {
+    data_raw_old = {
         "msgtimefrom": two_hours_ago,
         "msgtimeto": now,
         "polygon": {
@@ -114,6 +114,71 @@ def data_request_of_area(token):
             "type": "Polygon"
         }
     }
+
+    data_raw = {
+        "msgtimefrom": two_hours_ago,
+        "msgtimeto": now,
+        "polygon": {
+            "coordinates": [
+          [
+            [
+              10.359286605583947,
+              63.419130867795786
+            ],
+            [
+              10.391560425183059,
+              63.41586975271488
+            ],
+            [
+              10.435286245285766,
+              63.42472048783199
+            ],
+            [
+              10.47953261086667,
+              63.43473249809645
+            ],
+            [
+              10.507121521169267,
+              63.449394941119806
+            ],
+            [
+              10.501395520917413,
+              63.464980097690756
+            ],
+            [
+              10.491505156847296,
+              63.4882257431112
+            ],
+            [
+              10.453505336995107,
+              63.500073747690436
+            ],
+            [
+              10.412382244279826,
+              63.51354197957528
+            ],
+            [
+              10.363971514880518,
+              63.50936286319026
+            ],
+            [
+              10.301506057590217,
+              63.49171096032066
+            ],
+            [
+              10.267670601558962,
+              63.46428243634642
+            ],
+            [
+              10.359286605583947,
+              63.419130867795786
+            ]
+          ]
+        ],
+        "type": "Polygon"
+      }
+    }
+
 
     # Attempts to make the API request and return the response data.
     try:
