@@ -172,13 +172,15 @@ function Map({ darkMode, isCarouselActive }) {
     const diffInMinutes = Math.floor((currentTime - msgTime) / 1000 / 60);
 
     // Only returns ships with data updated within the last 10 minutes
-    return diffInMinutes < 15;
+    return diffInMinutes < 15 && ship.name && !ship.name.includes(".");
   })
   .map((ship, index) => {
     const msgTime = new Date(ship.msgtime);
     const currentTime = new Date();
     const diffInSeconds = Math.floor((currentTime - msgTime) / 1000);
 
+
+    console.log(ship.name)
     // Creates markers for each ship with a popup containing ship information
     return (
       <Marker
@@ -204,7 +206,7 @@ function Map({ darkMode, isCarouselActive }) {
                 alt={ship.name}
                 onError={(e) => {
                   e.target.onerror = null;
-                   e.target.style.display = "none";
+                  e.target.style.display = "none";
                 }}
               />
             )}
