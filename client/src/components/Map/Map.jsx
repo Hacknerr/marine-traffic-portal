@@ -194,9 +194,10 @@ function Map({ darkMode, isCarouselActive }) {
       >
         <Popup
             className={darkMode ? 'custom-popup-darkmode' : 'custom-popup'}
-            autoPan={false}>
+            autoPan={false}
+        >
           <div>
-            <h2>{ship.name}</h2>
+            <h2>{ship.name ? ship.name : 'Ukjent'}</h2>
             <p>MMSI: {ship.mmsi}</p>
             <p>Skipstype: {getShipTypeText(ship.shipType)}</p>
             <p>Fart: {ship.speedOverGround === 0 ? 'Ingen' : `${ship.speedOverGround} knop`}</p>
