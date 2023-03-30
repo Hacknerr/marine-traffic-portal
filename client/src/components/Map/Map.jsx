@@ -10,6 +10,41 @@ import './Popup.css';
 import 'leaflet-fullscreen/dist/Leaflet.fullscreen.js';
 import 'leaflet-fullscreen/dist/leaflet.fullscreen.css';
 
+function FullscreenInfoBox() {
+  const map = useMap();
+  const currentTime = new Date();
+
+  // CSS styles for the info box
+  const infoBoxStyle = {
+    position: 'absolute',
+    bottom: '50px',
+    right: '50px',
+    padding: '0px 10px',
+    lineHeight: '0.75',
+    backgroundColor: 'white',
+    zIndex: '1000',
+    fontSize: '14px',
+    textAlign: 'center',
+    borderBottom: '1px solid #8C67AC'
+  };
+
+  // Render the info box when the map is in full screen mode
+  if (map.isFullscreen()) {
+    return (
+      <div style={infoBoxStyle}>
+        <p>
+          {currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}
+        </p>
+        <p>
+          {currentTime.toLocaleDateString('nb-NO', { month: 'long', day: 'numeric' })}
+        </p>
+      </div>
+    );
+  }
+
+  return null;
+}
+
 function FullscreenControl() {
   const map = useMap();
 
@@ -238,6 +273,7 @@ function Map({ darkMode, isCarouselActive }) {
           <TileLayer url={darkMode ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png" : "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"} />
           {markers}
           <FullscreenControl />
+          <FullscreenInfoBox />
           {markers.length > 0 && (
           <PanToMarker position={[ships[activeMarkerIndex].latitude, ships[activeMarkerIndex].longitude]} isActive={isCarouselActive} />
         )}
