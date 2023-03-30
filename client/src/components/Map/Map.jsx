@@ -23,10 +23,13 @@ function FullscreenControl() {
 // Carousel
 function PanToMarker({ position, isActive }) {
   const map = useMap();
+  const positionWithOffset = [position[0] + 0.005, position[1]];
 
   useEffect(() => {
     if (isActive) {
-      map.flyTo(position, 15);
+      console.log(position)
+      console.log(positionWithOffset)
+      map.flyTo(positionWithOffset, 15);
       //map.setView(position, 15)
     }
   }, [position, isActive]);
@@ -41,7 +44,7 @@ function SetZoomOnCarouselActive({ isActive }) {
 
   useEffect(() => {
     if (isActive) {
-      map.setZoom(15);
+      map.setZoom(16);
     } else {
       map.setZoom(13);
     }
@@ -198,6 +201,17 @@ function Map({ darkMode, isCarouselActive }) {
         >
           <div>
             <h2>{ship.name ? ship.name : 'Ukjent'}</h2>
+            {ship.name && !ship.name.includes("/") && !ship.name.includes(".") && (
+              <img
+                className="popup-image"
+                src={`images/${ship.name}.jpg`}
+                alt={ship.name}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '';
+                }}
+              />
+            )}
             <p>MMSI: {ship.mmsi}</p>
             <p>Skipstype: {getShipTypeText(ship.shipType)}</p>
             <p>Fart: {ship.speedOverGround === 0 ? 'Ingen' : `${ship.speedOverGround} knop`}</p>
