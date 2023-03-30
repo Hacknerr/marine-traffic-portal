@@ -204,7 +204,7 @@ function Map({ darkMode, isCarouselActive }) {
                 alt={ship.name}
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = '';
+                   e.target.style.display = "none";
                 }}
               />
             )}
