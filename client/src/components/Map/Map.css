@@ -6,3 +6,8 @@
   top: 64px; /* Set the top value to the height of the navbar */
   left: 64px; /* Adjust this value according to your sidebar width */
 }
+
+/* Add this to your Map.css file */
+.rotate-0 {
+  transform: rotate(0deg) !important;
+}

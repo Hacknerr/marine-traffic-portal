@@ -33,6 +33,22 @@ function PanToMarker({ position, isActive }) {
   return null;
 }
 
+// Set zoom on carousel start
+function SetZoomOnCarouselActive({ isActive }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (isActive) {
+      map.setZoom(15);
+    } else {
+      map.setZoom(12);
+    }
+  }, [isActive, map]);
+
+  return null;
+}
+
+
 function Map({ darkMode, isCarouselActive }) {
   // Defines state variables to store ship-data
   const [ships, setShips] = useState([]);
@@ -166,7 +182,7 @@ function Map({ darkMode, isCarouselActive }) {
             }
           }}
       >
-        <Popup className={darkMode ? 'custom-popup' : ''}>
+        <Popup className={darkMode ? 'custom-popup-darkmode' : 'custom-popup'}>
           <div>
             <h2>{ship.name}</h2>
             <p>MMSI: {ship.mmsi}</p>
@@ -189,7 +205,7 @@ function Map({ darkMode, isCarouselActive }) {
       <div className="map-container">
         <MapContainer
             center={markerPositions.length > 0 ? markerPositions[0] : [63.48, 10.4]}
-            zoom={10}
+            zoom={12}
             style={{ height: '100%', width: '100%' }}
             zoomControl={false}
         >
@@ -199,6 +215,7 @@ function Map({ darkMode, isCarouselActive }) {
           {markers.length > 0 && (
           <PanToMarker position={[ships[activeMarkerIndex].latitude, ships[activeMarkerIndex].longitude]} isActive={isCarouselActive} />
         )}
+          <SetZoomOnCarouselActive isActive={isCarouselActive} />
         </MapContainer>
       </div>
   );
