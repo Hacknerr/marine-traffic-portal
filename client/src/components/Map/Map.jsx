@@ -23,16 +23,11 @@ function FullscreenControl() {
 // Carousel
 function PanToMarker({ position, isActive }) {
   const map = useMap();
-  const [lastFlyToTime, setLastFlyToTime] = useState(0);
 
   useEffect(() => {
     if (isActive) {
-      const now = Date.now();
-      console.log(now)
-      if (now - lastFlyToTime > 2000) {
-        map.flyTo(position);
-        setLastFlyToTime(now);
-      }
+      map.flyTo(position, 15);
+      //map.setView(position, 15)
     }
   }, [position, isActive]);
 
@@ -197,7 +192,9 @@ function Map({ darkMode, isCarouselActive }) {
             }
           }}
       >
-        <Popup className={darkMode ? 'custom-popup-darkmode' : 'custom-popup'}>
+        <Popup
+            className={darkMode ? 'custom-popup-darkmode' : 'custom-popup'}
+            autoPan={false}>
           <div>
             <h2>{ship.name}</h2>
             <p>MMSI: {ship.mmsi}</p>
