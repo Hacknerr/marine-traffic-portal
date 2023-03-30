@@ -1,49 +1,23 @@
 /* normal-mode */
-.custom-popup .leaflet-popup {
+.leaflet-popup {
   box-shadow: none;
   border-radius: 0;
 }
 
-.custom-popup .leaflet-popup-content-wrapper {
+.leaflet-popup-content-wrapper {
   background-color: #fff;
   border-radius: 0;
   box-shadow: 0 0 20px rgba(140, 103, 172, 0.3);
 }
 
-.custom-popup .leaflet-popup-content {
+.leaflet-popup-content {
   font-size: 14px;
   line-height: 1.5;
   padding: 16px;
   max-width: 300px;
 }
 
-.custom-popup .leaflet-popup h2 {
-  margin-bottom: 8px;
-  border-bottom: 1px solid #8C67AC;
-  padding-bottom: 8px;
-}
-
-/* dark-mode */
-.custom-popup-darkmode .leaflet-popup {
-  box-shadow: none;
-  border-radius: 0;
-}
-
-.custom-popup-darkmode .leaflet-popup-content-wrapper {
-  background-color: #333;
-  color: white;
-  border-radius: 0;
-  box-shadow: 0 0 20px rgba(140, 103, 172, 0.3);
-}
-
-.custom-popup-darkmode .leaflet-popup-content {
-  font-size: 14px;
-  line-height: 1.5;
-  padding: 16px;
-  max-width: 300px;
-}
-
-.custom-popup-darkmode .leaflet-popup h2 {
+.leaflet-popup h2 {
   margin-bottom: 8px;
   border-bottom: 1px solid #8C67AC;
   padding-bottom: 8px;
