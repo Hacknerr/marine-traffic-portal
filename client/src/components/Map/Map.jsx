@@ -23,15 +23,22 @@ function FullscreenControl() {
 // Carousel
 function PanToMarker({ position, isActive }) {
   const map = useMap();
+  const [lastFlyToTime, setLastFlyToTime] = useState(0);
 
   useEffect(() => {
     if (isActive) {
-      map.panTo(position);
+      const now = Date.now();
+      console.log(now)
+      if (now - lastFlyToTime > 2000) {
+        map.flyTo(position);
+        setLastFlyToTime(now);
+      }
     }
   }, [position, isActive]);
 
   return null;
 }
+
 
 // Set zoom on carousel start
 function SetZoomOnCarouselActive({ isActive }) {
@@ -89,17 +96,19 @@ function Map({ darkMode, isCarouselActive }) {
 
   // Carousel
   const [activeMarkerIndex, setActiveMarkerIndex] = useState(0);
+  const [activePopup, setActivePopup] = useState(null);
 
   useEffect(() => {
     if (isCarouselActive && ships.length > 0) {
       const interval = setInterval(() => {
         // Close the popup of the previous marker
         if (markerRefs.current[activeMarkerIndex]) {
-          markerRefs.current[activeMarkerIndex].closePopup()
+          setActivePopup(null);
+          markerRefs.current[activeMarkerIndex].openPopup();
         }
 
         setActiveMarkerIndex((prevIndex) => (prevIndex + 1) % ships.length);
-      }, 10000);
+      }, 5000);
 
       return () => clearInterval(interval);
     }
@@ -109,10 +118,14 @@ function Map({ darkMode, isCarouselActive }) {
   useEffect(() => {
     if (markerRefs.current[activeMarkerIndex]) {
       if (isCarouselActive || activeMarkerIndex === 0) {
-        markerRefs.current[activeMarkerIndex].openPopup();
+        if (activePopup) {
+          activePopup.closePopup(); // Close active popup if there is one
+        }
+        const newPopup = markerRefs.current[activeMarkerIndex].openPopup();
+        setActivePopup(newPopup); // Update active popup
       }
     }
-  }, [activeMarkerIndex, isCarouselActive]);
+  }, [activeMarkerIndex, isCarouselActive, activePopup]);
 
   // Sets up event source for Server-Sent Events (SSE) and handles incoming data
   useEffect(() => {
@@ -210,6 +223,7 @@ function Map({ darkMode, isCarouselActive }) {
             zoom={13}
             style={{ height: '100%', width: '100%' }}
             zoomControl={false}
+            attributionControl={false}
         >
           <TileLayer url={darkMode ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png" : "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"} />
           {markers}
