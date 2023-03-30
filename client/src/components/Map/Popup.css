@@ -12,15 +12,15 @@
 
 .leaflet-popup-content {
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.0;
   padding: 16px;
   max-width: 300px;
 }
 
 .leaflet-popup h2 {
   margin-bottom: 8px;
-  border-bottom: 1px solid #8C67AC;
   padding-bottom: 8px;
+  border-bottom: 1px solid #8C67AC;
 }
 
 /* Responsiveness */

@@ -27,16 +27,12 @@ function PanToMarker({ position, isActive }) {
 
   useEffect(() => {
     if (isActive) {
-      console.log(position)
-      console.log(positionWithOffset)
       map.flyTo(positionWithOffset, 15);
-      //map.setView(position, 15)
     }
   }, [position, isActive]);
 
   return null;
 }
-
 
 // Set zoom on carousel start
 function SetZoomOnCarouselActive({ isActive }) {
