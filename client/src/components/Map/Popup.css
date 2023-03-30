@@ -5,7 +5,7 @@
 }
 
 .leaflet-popup-content-wrapper {
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.9); /* semi-transparent white */
   border-radius: 0;
   box-shadow: 0 0 20px rgba(140, 103, 172, 0.3);
 }
@@ -53,3 +53,10 @@
     padding-bottom: 2px;
   }
 }
+
+.leaflet-popup-content-wrapper img.popup-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
