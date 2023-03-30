@@ -41,7 +41,7 @@ function SetZoomOnCarouselActive({ isActive }) {
     if (isActive) {
       map.setZoom(15);
     } else {
-      map.setZoom(12);
+      map.setZoom(13);
     }
   }, [isActive, map]);
 
@@ -99,7 +99,7 @@ function Map({ darkMode, isCarouselActive }) {
         }
 
         setActiveMarkerIndex((prevIndex) => (prevIndex + 1) % ships.length);
-      }, 2000);
+      }, 10000);
 
       return () => clearInterval(interval);
     }
@@ -108,9 +108,11 @@ function Map({ darkMode, isCarouselActive }) {
   // Open the popup for the active marker when activeMarkerIndex changes
   useEffect(() => {
     if (markerRefs.current[activeMarkerIndex]) {
-      markerRefs.current[activeMarkerIndex].openPopup();
+      if (isCarouselActive || activeMarkerIndex === 0) {
+        markerRefs.current[activeMarkerIndex].openPopup();
+      }
     }
-  }, [activeMarkerIndex]);
+  }, [activeMarkerIndex, isCarouselActive]);
 
   // Sets up event source for Server-Sent Events (SSE) and handles incoming data
   useEffect(() => {
@@ -204,8 +206,8 @@ function Map({ darkMode, isCarouselActive }) {
   return (
       <div className="map-container">
         <MapContainer
-            center={markerPositions.length > 0 ? markerPositions[0] : [63.48, 10.4]}
-            zoom={12}
+            center={markerPositions.length > 0 ? markerPositions[0] : [63.45, 10.4]}
+            zoom={13}
             style={{ height: '100%', width: '100%' }}
             zoomControl={false}
         >
