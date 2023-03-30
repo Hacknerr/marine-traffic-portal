@@ -210,12 +210,12 @@ function Map({ darkMode, isCarouselActive }) {
                 }}
               />
             )}
-            <p>MMSI: {ship.mmsi}</p>
-            <p>Skipstype: {getShipTypeText(ship.shipType)}</p>
-            <p>Fart: {ship.speedOverGround === 0 ? 'Ingen' : `${ship.speedOverGround} knop`}</p>
-            <p>Stevning: {ship.trueHeading === null ? 'Ingen' : `${ship.trueHeading}°`}</p>
-            <p>Kurs: {ship.courseOverGround == null ? 'Ingen' : (ship.courseOverGround === 0 ? 'Ingen' : `${ship.courseOverGround}°`)}</p>
-            <p>Sist oppdatert: {diffInSeconds < 15 ? 'Nå' : diffInSeconds < 60 ? `${diffInSeconds} sekunder siden` : `${Math.floor(diffInSeconds / 60)} minutt${Math.floor(diffInSeconds / 60) > 1 ? 'er' : ''} siden`}</p>
+            <p><span className="bolded-text">MMSI: </span>{ship.mmsi}</p>
+            <p><span className="bolded-text">Skipstype: </span>{getShipTypeText(ship.shipType)}</p>
+            <p><span className="bolded-text">Fart: </span>{ship.speedOverGround === 0 ? 'Ingen' : `${ship.speedOverGround} knop`}</p>
+            <p><span className="bolded-text">Stevning: </span>{ship.trueHeading === null ? 'Ingen' : `${ship.trueHeading}°`}</p>
+            <p><span className="bolded-text">Kurs: </span>{ship.courseOverGround == null ? 'Ingen' : (ship.courseOverGround === 0 ? 'Ingen' : `${ship.courseOverGround}°`)}</p>
+            <p><span className="bolded-text">Sist oppdatert: </span>{diffInSeconds < 15 ? 'Nå' : diffInSeconds < 60 ? `${diffInSeconds} sekunder siden` : `${Math.floor(diffInSeconds / 60)} minutt${Math.floor(diffInSeconds / 60) > 1 ? 'er' : ''} siden`}</p>
           </div>
         </Popup>
       </Marker>

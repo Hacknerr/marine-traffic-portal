@@ -12,7 +12,7 @@
 
 .leaflet-popup-content {
   font-size: 14px;
-  line-height: 1.0;
+  line-height: 0.75;
   padding: 16px;
   max-width: 300px;
 }
@@ -57,6 +57,11 @@
 .leaflet-popup-content-wrapper img.popup-image {
   max-width: 100%;
   max-height: 100%;
+}
+
+.bolded-text {
+  font-weight: bold;
+  color: #333;
 }
 
 
