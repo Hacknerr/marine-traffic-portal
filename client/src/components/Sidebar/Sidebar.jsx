@@ -305,7 +305,7 @@ export default function Sidebar( {onLoopIconClick} ) {
                         width: '300px',
                         height: 'auto',
                     }}>
-                        <Typography variant="body1">
+                        <Typography variant="body1" component={'span'}>
                             <p style={{
                                 fontSize: "18px",
                                 fontWeight: "bold",
@@ -339,7 +339,7 @@ export default function Sidebar( {onLoopIconClick} ) {
                         width: '300px',
                         height: 'auto',
                     }}>
-                        <Typography variant="body1">
+                        <Typography variant="body1" component={'span'}>
                             <p style={{
                                 fontSize: "18px",
                                 fontWeight: "bold",
