@@ -1,9 +1,0 @@
-.info-box {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 0;
-  box-shadow: 0 0 20px rgba(140, 103, 172, 0.2);
-}
