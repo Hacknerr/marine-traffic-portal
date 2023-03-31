@@ -27,7 +27,6 @@ import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import Popover from '@mui/material/Popover';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Map from "../Map/Map.jsx";
-import './Sidebar.css'
 
 import { useState, useEffect } from 'react';
 
@@ -211,11 +210,13 @@ export default function Sidebar( {onLoopIconClick} ) {
                                     minWidth: 0,
                                     mr: open ? 3 : 'auto',
                                     justifyContent: 'center',
+                                    color: isCarouselActive ? '#a513fa' : undefined, // Add this line
                                 }}
                                 onClick={toggleCarousel}
                             >
                                 <ViewCarouselIcon />
                             </ListItemIcon>
+
                             <ListItemText primary="Karusellmodus" sx={{opacity: open ? 1 : 0}} />
                         </ListItemButton>
                     </ListItem>
