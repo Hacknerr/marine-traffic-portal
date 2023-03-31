@@ -164,8 +164,8 @@ function Map({ darkMode, isCarouselActive }) {
 
   // Sets up event source for Server-Sent Events (SSE) and handles incoming data
   useEffect(() => {
-    //const eventSource = new EventSource('http://localhost:5000/sse');
-    const eventSource = new EventSource('http://10.212.173.142:5000/sse');
+    const eventSource = new EventSource('http://localhost:5000/sse');
+    //const eventSource = new EventSource('http://10.212.173.142:5000/sse');
 
     // When a new message is received from SSE, update the state of the ships
     eventSource.onmessage = (event) => {
@@ -173,7 +173,10 @@ function Map({ darkMode, isCarouselActive }) {
       const data = event.data;
       try {
         const parsedData = JSON.parse(data);
-        setShips(parsedData);
+        // Wipe and replace the current ships with the new ones
+        setShips((prevShips) => {
+          return [...parsedData];
+        });
 
         // Caches the latest ship-data in local storage
         console.log('Writing latest data to localstorage.');
