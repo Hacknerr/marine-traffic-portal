@@ -28,7 +28,7 @@ def get_datetime_2_hours_ago():
     current_datetime_two = datetime.now(tz=oslo_tz)
 
     # Calculates the datetime 2 hours ago from the current time
-    datetime_2_hours_ago = current_datetime_two - timedelta(hours=2)
+    datetime_2_hours_ago = current_datetime_two - timedelta(hours=1)
 
     # Convert the datetime object to UTC timezone
     datetime_2_hours_ago_utc = datetime_2_hours_ago.astimezone(pytz.UTC)

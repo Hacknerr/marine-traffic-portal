@@ -202,20 +202,13 @@ function Map({ darkMode, isCarouselActive }) {
   // Filters out ships based on time difference and maps them to markers
   const markers = ships
   .filter((ship) => {
-    const msgTime = new Date(ship.msgtime);
-    const currentTime = new Date();
-    const diffInMinutes = Math.floor((currentTime - msgTime) / 1000 / 60);
-
-    // Only returns ships with data updated within the last 10 minutes
-    return diffInMinutes < 15 && ship.name && !ship.name.includes(".");
+    return ship.name && !ship.name.includes(".");
   })
   .map((ship, index) => {
     const msgTime = new Date(ship.msgtime);
     const currentTime = new Date();
     const diffInSeconds = Math.floor((currentTime - msgTime) / 1000);
 
-
-    console.log(ship.name)
     // Creates markers for each ship with a popup containing ship information
     return (
       <Marker
