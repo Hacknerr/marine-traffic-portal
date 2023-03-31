@@ -210,7 +210,7 @@ export default function Sidebar( {onLoopIconClick} ) {
                                     minWidth: 0,
                                     mr: open ? 3 : 'auto',
                                     justifyContent: 'center',
-                                    color: isCarouselActive ? '#a513fa' : undefined, // Add this line
+                                    color: isCarouselActive ? '#8F00E3' : undefined, // Add this line
                                 }}
                                 onClick={toggleCarousel}
                             >
