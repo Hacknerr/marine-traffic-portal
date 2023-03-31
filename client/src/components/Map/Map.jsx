@@ -228,8 +228,9 @@ function Map({ darkMode, isCarouselActive }) {
           }}
       >
         <Popup
+            key={`${ship.mmsi}-${isCarouselActive}`}
             className={darkMode ? 'custom-popup-darkmode' : 'custom-popup'}
-            autoPan={true}
+            autoPan={isCarouselActive}
             autoPanPadding={isMobileDevice() ? L.point(20, 200) : L.point(300, 200)}
         >
           <div>
