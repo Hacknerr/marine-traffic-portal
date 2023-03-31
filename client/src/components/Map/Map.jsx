@@ -45,6 +45,11 @@ function FullscreenInfoBox() {
   return null;
 }
 
+// Add the isMobileDevice function here
+function isMobileDevice() {
+  return window.innerWidth <= 768;
+}
+
 function FullscreenControl() {
   const map = useMap();
 
@@ -62,7 +67,7 @@ function PanToMarker({ position, isActive }) {
 
   useEffect(() => {
     if (isActive) {
-      map.flyTo(positionWithOffset, 15);
+      // map.flyTo(positionWithOffset, 15);
     }
   }, [position, isActive]);
 
@@ -130,18 +135,19 @@ function Map({ darkMode, isCarouselActive }) {
   useEffect(() => {
     if (isCarouselActive && ships.length > 0) {
       const interval = setInterval(() => {
+        setActiveMarkerIndex((prevIndex) => (prevIndex + 1) % ships.length);
+
         // Close the popup of the previous marker
         if (markerRefs.current[activeMarkerIndex]) {
           setActivePopup(null);
           markerRefs.current[activeMarkerIndex].openPopup();
         }
-
-        setActiveMarkerIndex((prevIndex) => (prevIndex + 1) % ships.length);
-      }, 5000);
+      }, 8000);
 
       return () => clearInterval(interval);
     }
   }, [ships, isCarouselActive, activeMarkerIndex]);
+
 
   // Open the popup for the active marker when activeMarkerIndex changes
   useEffect(() => {
@@ -223,7 +229,8 @@ function Map({ darkMode, isCarouselActive }) {
       >
         <Popup
             className={darkMode ? 'custom-popup-darkmode' : 'custom-popup'}
-            autoPan={false}
+            autoPan={true}
+            autoPanPadding={isMobileDevice() ? L.point(20, 300) : L.point(300, 300)}
         >
           <div>
             <h2>{ship.name ? ship.name : 'Ukjent'}</h2>
