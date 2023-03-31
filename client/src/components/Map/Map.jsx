@@ -230,7 +230,7 @@ function Map({ darkMode, isCarouselActive }) {
         <Popup
             className={darkMode ? 'custom-popup-darkmode' : 'custom-popup'}
             autoPan={true}
-            autoPanPadding={isMobileDevice() ? L.point(20, 300) : L.point(300, 300)}
+            autoPanPadding={isMobileDevice() ? L.point(20, 200) : L.point(300, 200)}
         >
           <div>
             <h2>{ship.name ? ship.name : 'Ukjent'}</h2>
