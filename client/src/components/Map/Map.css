@@ -1,8 +1,23 @@
 
 .map-container {
-  height: calc(100vh - 64px); /* Subtract the height of the navbar, which is 64px by default */
-  width: calc(100% - 64px); /* Adjust this value according to your sidebar width */
+  height: calc(100vh - 64px);
+  width: calc(100% - 64px);
   position: absolute;
-  top: 64px; /* Set the top value to the height of the navbar */
-  left: 64px; /* Adjust this value according to your sidebar width */
+  top: 64px;
+  left: 64px;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 767px) {
+  .map-container {
+    height: calc(100vh - 48px);
+    width: calc(100% - 48px);
+    top: 57px;
+    left: 57px;
+  }
+}
+
+.leaflet-control-fullscreen {
+  position: absolute;
+  z-index: 1001;
 }
