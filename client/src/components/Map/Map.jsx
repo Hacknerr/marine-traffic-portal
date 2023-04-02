@@ -266,7 +266,6 @@ function getShipTypeText(skipstypeNummer) {
   }
 }
 
-
   // Carousel
   const [activeMarkerIndex, setActiveMarkerIndex] = useState(0);
   const [activePopup, setActivePopup] = useState(null);
@@ -302,8 +301,8 @@ function getShipTypeText(skipstypeNummer) {
 
   // Sets up event source for Server-Sent Events (SSE) and handles incoming data
   useEffect(() => {
-    const eventSource = new EventSource('http://localhost:5000/sse');
-    //const eventSource = new EventSource('http://10.212.173.142:5000/sse');
+    //const eventSource = new EventSource('http://localhost:5000/sse');
+    const eventSource = new EventSource('http://10.212.173.142:5000/sse');
 
     // When a new message is received from SSE, update the state of the ships
     eventSource.onmessage = (event) => {
