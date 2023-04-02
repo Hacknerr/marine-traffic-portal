@@ -201,7 +201,7 @@ export default function Sidebar( {onLoopIconClick} ) {
                 <List>
                     <ListItem key="Marine tracking" disablePadding sx={{display: 'block'}}>
                         <ListItemButton
-                            onClick={onLoopIconClick}
+                            onClick={toggleCarousel}
                             sx={{
                                 minHeight: 48,
                                 justifyContent: open ? 'initial' : 'center',
@@ -215,7 +215,6 @@ export default function Sidebar( {onLoopIconClick} ) {
                                     justifyContent: 'center',
                                     color: isCarouselActive ? '#8F00E3' : undefined,
                                 }}
-                                onClick={toggleCarousel}
                             >
                                 <Tooltip title="Slå på karusellmodus">
                                     <ViewCarouselIcon />
