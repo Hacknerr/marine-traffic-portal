@@ -211,10 +211,16 @@ function Map({ darkMode, isCarouselActive }) {
 
   // Filters out ships based on time difference and maps them to markers
   const markers = ships
-  .filter((ship) => {
+      .filter((ship) => {
     return ship.name && !ship.name.includes(".");
   })
-  .map((ship, index) => {
+      .filter((ship) => {
+    const msgTime = new Date(ship.msgtime);
+    const currentTime = new Date();
+    const diffInMinutes = (currentTime - msgTime) / 1000 / 60;
+    return diffInMinutes <= 15;
+      })
+      .map((ship, index) => {
     const msgTime = new Date(ship.msgtime);
     const currentTime = new Date();
     const diffInSeconds = Math.floor((currentTime - msgTime) / 1000);
