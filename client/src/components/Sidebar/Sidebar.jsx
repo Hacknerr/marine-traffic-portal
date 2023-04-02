@@ -20,19 +20,16 @@ import ViewCarouselIcon from '@mui/icons-material/ViewCarousel';
 import InfoIcon from '@mui/icons-material/Info';
 import CopyrightIcon from '@mui/icons-material/Copyright';
 import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
-
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
-
-
 import Popover from '@mui/material/Popover';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Map from "../Map/Map.jsx";
-
 import { useState, useEffect } from 'react';
 import {Tooltip} from "@mui/material";
 
 const drawerWidth = 240;
 
+// Defines a mixin function named `openedMixin` that takes a theme object as its argument
 const openedMixin = (theme) => ({
     width: drawerWidth,
     transition: theme.transitions.create('width', {
@@ -42,6 +39,7 @@ const openedMixin = (theme) => ({
     overflowX: 'hidden',
 });
 
+// Defines a mixin function named `closedMixin` that takes a theme object as its argument
 const closedMixin = (theme) => ({
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
@@ -54,6 +52,7 @@ const closedMixin = (theme) => ({
     },
 });
 
+// Defines a styled component named `DrawerHeader` using the `styled` function from the Material-UI library
 const DrawerHeader = styled('div')(({theme}) => ({
     display: 'flex',
     alignItems: 'center',
@@ -63,6 +62,7 @@ const DrawerHeader = styled('div')(({theme}) => ({
     ...theme.mixins.toolbar,
 }));
 
+// Defines a styled component named `AppBar` by extending the `MuiAppBar` component from the Material-UI library
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open' && prop !== 'darkMode',
 })(({theme, open, darkMode}) => ({
@@ -84,6 +84,7 @@ const AppBar = styled(MuiAppBar, {
     }),
 }));
 
+// Defines a styled component named `Drawer` by extending the `MuiDrawer` component from the Material-UI library
 const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})(
     ({theme, open}) => ({
         width: drawerWidth,
@@ -101,57 +102,52 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
     }),
 );
 
+// Sidebar component that appears on the left-hand side of the application
 export default function Sidebar( {onLoopIconClick} ) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
+    const [infoPopoverOpen, setInfoPopoverOpen] = React.useState(false); // Info popup
+    const [infoAnchorEl, setInfoAnchorEl] = React.useState(null); // Info popup
+    const [popoverOpen, setPopoverOpen] = React.useState(false); // Copyright popup
+    const [anchorEl, setAnchorEl] = React.useState(null); // Copyright popup
+    const [darkMode, setDarkMode] = React.useState(false); // Dark mode
+    const [currentTime, setCurrentTime] = useState(new Date()); // Clock
+    const [isCarouselActive, setIsCarouselActive] = useState(false); // Carousel toggle
 
+    // Functions to handle opening and closing of the drawer
     const handleDrawerOpen = () => {
         setOpen(true);
     };
-
     const handleDrawerClose = () => {
         setOpen(false);
     };
 
-    // Info Popup
-    const [infoPopoverOpen, setInfoPopoverOpen] = React.useState(false);
-    const [infoAnchorEl, setInfoAnchorEl] = React.useState(null);
-
+    // Functions to handle opening and closing of the info popover
     const handleInfoPopoverOpen = (event) => {
         setInfoAnchorEl(event.currentTarget);
         setInfoPopoverOpen(true);
     };
-
     const handleInfoPopoverClose = () => {
         setInfoAnchorEl(null);
         setInfoPopoverOpen(false);
     };
 
-    // Copyright Popup
-    const [popoverOpen, setPopoverOpen] = React.useState(false);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-
+    // Functions to handle opening and closing of the copyright popover
     const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
     setPopoverOpen(true);
     };
-
     const handlePopoverClose = () => {
         setAnchorEl(null);
         setPopoverOpen(false);
     };
 
-    // Dark mode
-    const [darkMode, setDarkMode] = React.useState(false);
+    // Function to toggle the carousel mode
+    const toggleCarousel = () => {
+        setIsCarouselActive((prevState) => !prevState);
+    };
 
-    const appTheme = createTheme({
-      palette: {
-        mode: darkMode ? 'dark' : 'light',
-      },
-    });
-
-    // Clock
-    const [currentTime, setCurrentTime] = useState(new Date());
+    // Effect hook to update the current time every second
     useEffect(() => {
         const timer = setInterval(() => {
             setCurrentTime(new Date());
@@ -159,12 +155,14 @@ export default function Sidebar( {onLoopIconClick} ) {
         return () => clearInterval(timer);
     }, []);
 
-    // Carousel toggle
-    const [isCarouselActive, setIsCarouselActive] = useState(false);
-    const toggleCarousel = () => {
-        setIsCarouselActive((prevState) => !prevState);
-    };
+    // Defined a theme using createTheme function and current value of darkMode state
+    const appTheme = createTheme({
+      palette: {
+        mode: darkMode ? 'dark' : 'light',
+      },
+    });
 
+    // Return JSX expression that renders Sidebar component
     return (
         <ThemeProvider theme={appTheme}>
         <Box sx={{display: 'flex'}}>
