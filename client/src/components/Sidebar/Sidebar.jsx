@@ -29,6 +29,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Map from "../Map/Map.jsx";
 
 import { useState, useEffect } from 'react';
+import {Tooltip} from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -171,18 +172,20 @@ export default function Sidebar( {onLoopIconClick} ) {
             <Map darkMode={darkMode} isCarouselActive={isCarouselActive}/>
             <AppBar position="absolute" open={open} darkMode={darkMode}>
                 <Toolbar>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        sx={{
-                            marginRight: 5,
-                            ...(open && {display: 'none'}),
-                        }}
-                    >
-                        <MenuIcon/>
-                    </IconButton>
+                    <Tooltip title="Åpne meny" arrow>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="start"
+                            sx={{
+                                marginRight: 5,
+                                ...(open && {display: 'none'}),
+                            }}
+                        >
+                            <MenuIcon/>
+                        </IconButton>
+                    </Tooltip>
                     <Typography variant="h6" noWrap component="div">
                         Marine Traffic Portal
                     </Typography>
@@ -210,44 +213,22 @@ export default function Sidebar( {onLoopIconClick} ) {
                                     minWidth: 0,
                                     mr: open ? 3 : 'auto',
                                     justifyContent: 'center',
-                                    color: isCarouselActive ? '#8F00E3' : undefined, // Add this line
+                                    color: isCarouselActive ? '#8F00E3' : undefined,
                                 }}
                                 onClick={toggleCarousel}
                             >
-                                <ViewCarouselIcon />
+                                <Tooltip title="Slå på karusellmodus">
+                                    <ViewCarouselIcon />
+                                </Tooltip>
                             </ListItemIcon>
 
                             <ListItemText primary="Karusellmodus" sx={{opacity: open ? 1 : 0}} />
                         </ListItemButton>
                     </ListItem>
                     <ListItem key="Dark/light mode" disablePadding sx={{display: 'block'}}>
-                        <ListItemButton
-                            onClick={() => setDarkMode(!darkMode)}
-                            sx={{
-                                minHeight: 48,
-                                justifyContent: open ? 'initial' : 'center',
-                                px: 2.5,
-                            }}
-                        >
-                            <ListItemIcon
-                                sx={{
-                                    minWidth: 0,
-                                    mr: open ? 3 : 'auto',
-                                    justifyContent: 'center',
-                                }}
-                            >
-                                {darkMode ? <WbSunnyIcon /> : <DarkModeTwoToneIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary="Mørk/lys modus" sx={{opacity: open ? 1 : 0}} />
-                        </ListItemButton>
-                    </ListItem>
-                </List>
-                <Divider/>
-                <List>
-                    {['Informasjon', 'Opphavsrett'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{display: 'block'}}>
+                        <Tooltip title="Veksle mellom mørk/lys modus" arrow>
                             <ListItemButton
-                                onClick={index % 2 === 0 ? handleInfoPopoverOpen : handlePopoverOpen}
+                                onClick={() => setDarkMode(!darkMode)}
                                 sx={{
                                     minHeight: 48,
                                     justifyContent: open ? 'initial' : 'center',
@@ -261,11 +242,39 @@ export default function Sidebar( {onLoopIconClick} ) {
                                         justifyContent: 'center',
                                     }}
                                 >
-                                    {index % 2 === 0 ? <InfoIcon/> : <CopyrightIcon/>}
+                                    {darkMode ? <WbSunnyIcon /> : <DarkModeTwoToneIcon />}
                                 </ListItemIcon>
-                                <ListItemText secondary={text} sx={{
-                                    opacity: open ? 1 : 0}}/>
+                                <ListItemText primary="Mørk/Lys modus" sx={{opacity: open ? 1 : 0}} />
                             </ListItemButton>
+                        </Tooltip>
+                    </ListItem>
+                </List>
+                <Divider/>
+                <List>
+                    {['Informasjon', 'Opphavsrett'].map((text, index) => (
+                        <ListItem key={text} disablePadding sx={{display: 'block'}}>
+                            <Tooltip title={text === "Informasjon" ? "Vis informasjon" : "Vis opphavsrett"} arrow>
+                                <ListItemButton
+                                    onClick={index % 2 === 0 ? handleInfoPopoverOpen : handlePopoverOpen}
+                                    sx={{
+                                        minHeight: 48,
+                                        justifyContent: open ? 'initial' : 'center',
+                                        px: 2.5,
+                                    }}
+                                >
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: 0,
+                                            mr: open ? 3 : 'auto',
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                        {index % 2 === 0 ? <InfoIcon/> : <CopyrightIcon/>}
+                                    </ListItemIcon>
+                                    <ListItemText secondary={text} sx={{
+                                        opacity: open ? 1 : 0}}/>
+                                </ListItemButton>
+                            </Tooltip>
                         </ListItem>
                     ))}
                 </List>
