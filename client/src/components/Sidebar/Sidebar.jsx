@@ -281,21 +281,19 @@ export default function Sidebar( {onLoopIconClick} ) {
                 <Divider/>
                 <List>
                   <ListItem sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <ListItemText
-                      secondaryTypographyProps={{ sx: { fontSize: 11 } }}
-                      primary={currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}
-                      secondary={currentTime.toLocaleDateString('nb-NO', { month: 'long', day: 'numeric' })}
-                      sx={{
-                        opacity: open ? 1 : 1,
-                        color: (theme) => theme.palette.text.secondary,
-                        textAlign: 'center',
-                      }}
-                    />
-                  </ListItem>
+                      <ListItemText
+                        secondaryTypographyProps={{ sx: { fontSize: 11 } }}
+                        primary={new Intl.DateTimeFormat('nb-NO', { hour: '2-digit', minute: '2-digit', hour12: false }).format(currentTime)}
+                        secondary={currentTime.toLocaleDateString('nb-NO', { month: 'long', day: 'numeric' })}
+                        sx={{
+                          opacity: open ? 1 : 1,
+                          color: (theme) => theme.palette.text.secondary,
+                          textAlign: 'center',
+                        }}
+                      />
+                    </ListItem>
                 </List>
-
             </Drawer>
-
                 <Popover
                     open={infoPopoverOpen}
                     anchorEl={infoAnchorEl}

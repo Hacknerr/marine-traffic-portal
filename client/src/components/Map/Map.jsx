@@ -33,7 +33,7 @@ function FullscreenInfoBox() {
     return (
       <div style={infoBoxStyle}>
         <p>
-          {currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false })}
+          {currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })}
         </p>
         <p>
           {currentTime.toLocaleDateString('nb-NO', { month: 'long', day: 'numeric' })}
