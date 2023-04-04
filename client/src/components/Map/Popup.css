@@ -1,11 +1,11 @@
-/* normal-mode */
+/* Normal-mode */
 .leaflet-popup {
   box-shadow: none;
   border-radius: 0;
 }
 
 .leaflet-popup-content-wrapper {
-  background-color: rgba(255, 255, 255, 1); /* semi-transparent white */
+  background-color: rgba(255, 255, 255, 1);
   border-radius: 0;
   box-shadow: none;
   border-bottom: 1px solid #8C67AC;
@@ -28,31 +28,31 @@
 /* Responsiveness */
 @media (max-width: 767px) {
   .leaflet-popup-content {
-    font-size: 14px; /* increased from 12px */
-    padding: 14px; /* increased from 12px */
-    max-width: 300px; /* increased from 250px */
+    font-size: 14px;
+    padding: 14px;
+    max-width: 300px;
   }
 
   .leaflet-popup h2 {
-    font-size: 18px; /* increased from 16px */
-    margin-bottom: 6px; /* increased from 4px */
+    font-size: 18px;
+    margin-bottom: 6px;
     border-bottom: 1px solid #8C67AC;
-    padding-bottom: 6px; /* increased from 4px */
+    padding-bottom: 6px;
   }
 }
 
 @media (max-width: 480px) {
   .leaflet-popup-content {
-    font-size: 12px; /* increased from 10px */
-    padding: 10px; /* increased from 8px */
-    max-width: 220px; /* increased from 200px */
+    font-size: 12px;
+    padding: 10px;
+    max-width: 220px;
   }
 
   .leaflet-popup h2 {
-    font-size: 16px; /* increased from 14px */
-    margin-bottom: 4px; /* increased from 2px */
+    font-size: 16px;
+    margin-bottom: 4px;
     border-bottom: 1px solid #8C67AC;
-    padding-bottom: 4px; /* increased from 2px */
+    padding-bottom: 4px;
   }
 }
 
@@ -65,5 +65,22 @@
   font-weight: bold;
   color: #333;
 }
+
+@media (min-width: 1920px) {
+  .leaflet-popup-content {
+  font-size: 16px;
+  line-height: 0.75;
+  padding: 20px;
+  max-width: 400px;
+  }
+
+  .leaflet-popup h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #8C67AC;
+  padding-bottom: 10px;
+  }
+}
+
 
 
