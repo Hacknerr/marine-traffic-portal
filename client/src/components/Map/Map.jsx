@@ -10,6 +10,8 @@ import './Popup.css';
 import 'leaflet-fullscreen/dist/Leaflet.fullscreen.js';
 import 'leaflet-fullscreen/dist/leaflet.fullscreen.css';
 
+import { ZoomControl } from 'react-leaflet';
+
 function FullscreenInfoBox( {darkMode}) {
   const map = useMap();
   const currentTime = new Date();
@@ -90,6 +92,22 @@ function SetZoomOnCarouselActive({ isActive }) {
   return null;
 }
 
+// Takes a 'position' prop and renders a ZoomControl component with the given position
+function CustomZoomControl({ position }) {
+  return <ZoomControl position={position} />;
+}
+
+// Takes a 'position' prop and renders a CustomZoomControl component only if the map is not in fullscreen mode.
+function ConditionalZoomControl({ position }) {
+  const map = useMap();
+
+  // Checks if the map is not in fullscreen mode
+  if (!map.isFullscreen()) {
+    return <CustomZoomControl position={position} />;
+  }
+
+  return null;
+}
 
 function Map({ darkMode, isCarouselActive }) {
   // Defines state variables to store ship-data
@@ -415,6 +433,8 @@ function getShipTypeText(skipstypeNummer) {
             zoom={13}
             style={{ height: '100%', width: '100%' }}
             zoomControl={false}
+            maxZoom={19}
+            minZoom={5}
             attributionControl={false}
         >
           <TileLayer url={darkMode ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png" : "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"} />
@@ -425,6 +445,7 @@ function getShipTypeText(skipstypeNummer) {
           <PanToMarker position={[ships[activeMarkerIndex].latitude, ships[activeMarkerIndex].longitude]} isActive={isCarouselActive} />
         )}
           <SetZoomOnCarouselActive isActive={isCarouselActive} />
+          <ConditionalZoomControl position="bottomright" />
         </MapContainer>
       </div>
   );
