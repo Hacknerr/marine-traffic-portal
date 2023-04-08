@@ -69,7 +69,6 @@
 @media (min-width: 1920px) {
   .leaflet-popup-content {
   font-size: 16px;
-  line-height: 0.75;
   padding: 20px;
   max-width: 400px;
   }
@@ -79,6 +78,9 @@
   margin-bottom: 10px;
   border-bottom: 2px solid #8C67AC;
   padding-bottom: 10px;
+  }
+  .normal-text {
+    line-height: 1;
   }
 }
 
