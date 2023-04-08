@@ -85,7 +85,7 @@ function SetZoomOnCarouselActive({ isActive }) {
     if (isActive) {
       map.setZoom(16);
     } else {
-      map.setZoom(13);
+      map.setZoom(14);
     }
   }, [isActive, map]);
 
@@ -363,6 +363,15 @@ function getShipTypeText(skipstypeNummer) {
     shadowSize: [41, 41]
   });
 
+  const boatIcon = new L.Icon({
+    iconUrl: '/boat-icon.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
+
   // Filters out ships based on time difference and maps them to markers
   const markers = ships
       .filter((ship) => {
@@ -384,7 +393,7 @@ function getShipTypeText(skipstypeNummer) {
       <Marker
           key={ship.mmsi}
           position={[ship.latitude, ship.longitude]}
-          icon={purpleIcon}
+          icon={boatIcon}
           ref={(marker) => {
             if (marker) {
               markerRefs.current[index] = marker;
@@ -429,7 +438,7 @@ function getShipTypeText(skipstypeNummer) {
   return (
       <div className="map-container">
         <MapContainer
-            center={markerPositions.length > 0 ? markerPositions[0] : [63.45, 10.4]}
+            center={markerPositions.length > 0 ? markerPositions[0] : [63.442593, 10.4]}
             zoom={13}
             style={{ height: '100%', width: '100%' }}
             zoomControl={false}
