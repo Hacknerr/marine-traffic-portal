@@ -301,8 +301,8 @@ function getShipTypeText(skipstypeNummer) {
 
   // Sets up event source for Server-Sent Events (SSE) and handles incoming data
   useEffect(() => {
-   // const eventSource = new EventSource('http://localhost:5000/sse');
-    const eventSource = new EventSource('http://10.212.173.142:5000/sse');
+   const eventSource = new EventSource('http://localhost:5000/sse');
+   // const eventSource = new EventSource('http://10.212.173.142:5000/sse');
 
     // When a new message is received from SSE, update the state of the ships
     eventSource.onmessage = (event) => {
@@ -393,11 +393,11 @@ function getShipTypeText(skipstypeNummer) {
               />
             )}
             <p><span className="bolded-text">MMSI: </span>{ship.mmsi}</p>
-            <p><span className="bolded-text">Skipstype: </span>{getShipTypeText(ship.shipType)}</p>
-            <p><span className="bolded-text">Fart: </span>{ship.speedOverGround === 0 ? 'Ingen' : `${ship.speedOverGround} knop`}</p>
-            <p><span className="bolded-text">Stevning: </span>{ship.trueHeading === null ? 'Ingen' : `${ship.trueHeading}°`}</p>
-            <p><span className="bolded-text">Kurs: </span>{ship.courseOverGround == null ? 'Ingen' : (ship.courseOverGround === 0 ? 'Ingen' : `${ship.courseOverGround}°`)}</p>
-            <p><span className="bolded-text">Sist oppdatert: </span>{diffInSeconds < 15 ? 'Nå' : diffInSeconds < 60 ? `${diffInSeconds} sekunder siden` : `${Math.floor(diffInSeconds / 60)} minutt${Math.floor(diffInSeconds / 60) > 1 ? 'er' : ''} siden`}</p>
+            <p><span className="bolded-text">Skipstype: </span><span className="normal-text">{getShipTypeText(ship.shipType)}</span></p>
+            <p><span className="bolded-text">Fart: </span><span className="normal-text">{ship.speedOverGround === 0 ? 'Ingen' : `${ship.speedOverGround} knop`}</span></p>
+            <p><span className="bolded-text">Stevning: </span><span className="normal-text">{ship.trueHeading === null ? 'Ingen' : `${ship.trueHeading}°`}</span></p>
+            <p><span className="bolded-text">Kurs: </span><span className="normal-text">{ship.courseOverGround == null ? 'Ingen' : (ship.courseOverGround === 0 ? 'Ingen' : `${ship.courseOverGround}°`)}</span></p>
+            <p><span className="bolded-text">Sist oppdatert: </span><span className="normal-text">{diffInSeconds < 15 ? 'Nå' : diffInSeconds < 60 ? `${diffInSeconds} sekunder siden` : `${Math.floor(diffInSeconds / 60)} minutt${Math.floor(diffInSeconds / 60) > 1 ? 'er' : ''} siden`}</span></p>
           </div>
         </Popup>
       </Marker>
