@@ -155,7 +155,7 @@ function getShipTypeText(skipstypeNummer) {
     case 27:
     case 28:
     case 29:
-    return 'Vinge i sjøen (WIG), Reservert for fremtidig bruk';
+    return 'Vinge i sjøen (WIG)';
     case 30:
     return 'Fiskeskøyte';
     case 31:
@@ -189,7 +189,7 @@ function getShipTypeText(skipstypeNummer) {
     case 46:
     case 47:
     case 48:
-    return 'Høyhastighetsfartøy, Reservert for fremtidig bruk';
+    return 'Høyhastighetsfartøy';
     case 49:
     return 'Høyhastighetsfartøy';
     case 50:
@@ -225,7 +225,7 @@ function getShipTypeText(skipstypeNummer) {
     case 66:
     case 67:
     case 68:
-    return 'Passasjer, Reservert for fremtidig bruk';
+    return 'Passasjer';
     case 69:
     return 'Passasjer';
     case 70:
@@ -242,7 +242,7 @@ function getShipTypeText(skipstypeNummer) {
     case 76:
     case 77:
     case 78:
-    return 'Last, Reservert for fremtidig bruk';
+    return 'Last';
     case 79:
     return 'Last';
     case 80:
@@ -259,7 +259,7 @@ function getShipTypeText(skipstypeNummer) {
     case 86:
     case 87:
     case 88:
-    return 'Tanker, Reservert for fremtidig bruk';
+    return 'Tanker';
     case 89:
     return 'Tanker';
     case 90:
@@ -276,7 +276,7 @@ function getShipTypeText(skipstypeNummer) {
     case 96:
     case 97:
     case 98:
-    return 'Annen type, Reservert for fremtidig bruk';
+    return 'Annen type';
     case 99:
     return 'Annen type';
     default:
