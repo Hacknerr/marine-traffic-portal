@@ -115,9 +115,9 @@ function Map({ darkMode, isCarouselActive }) {
 
   const markerRefs = useRef([]);
 
-  // Definerer en funksjon som mapper skipstype-nummer til tilsvarende tekst
-function getShipTypeText(skipstypeNummer) {
-  switch (skipstypeNummer) {
+  // Defines a function that maps ship type number to corresponding text
+function getShipTypeText(shipTypeNumber) {
+  switch (shipTypeNumber) {
     case 0:
     return 'Ikke tilgjengelig (standard)';
     case 1:
@@ -319,8 +319,8 @@ function getShipTypeText(skipstypeNummer) {
 
   // Sets up event source for Server-Sent Events (SSE) and handles incoming data
   useEffect(() => {
-   // const eventSource = new EventSource('http://localhost:5000/sse');
-   const eventSource = new EventSource('http://10.212.168.100:5000/sse');
+   const eventSource = new EventSource('http://localhost:5000/sse');
+   // const eventSource = new EventSource('http://10.212.168.100:5000/sse');
 
     // When a new message is received from SSE, update the state of the ships
     eventSource.onmessage = (event) => {
