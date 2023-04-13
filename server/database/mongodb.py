@@ -1,10 +1,8 @@
 import json
 import datetime
-import time
 import pymongo
 
 from sty import fg, bg, ef, rs
-from sty import Style, RgbFg
 
 # Initializes the connection to a local MongoDB instance.
 client = pymongo.MongoClient("mongodb://mongodb:27017/", w='majority')
