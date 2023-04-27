@@ -7,7 +7,6 @@ communication, and it manages tasks with the help of the threading module.
 
 import time
 import threading
-
 from requests import RequestException
 from database import mongodb
 from barentswatch import data_request, authentication
