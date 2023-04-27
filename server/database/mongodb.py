@@ -5,11 +5,12 @@ import pymongo
 from sty import fg, bg, ef, rs
 
 # Initializes the connection to a local MongoDB instance.
-client = pymongo.MongoClient("mongodb://mongodb:27017/", w='majority')
-# client = pymongo.MongoClient("mongodb://localhost:27017/", w='majority')
+# client = pymongo.MongoClient("mongodb://mongodb:27017/", w='majority')
+client = pymongo.MongoClient("mongodb://localhost:27017/", w='majority')
 db = client.get_database("mydatabase")
 
 
+# Write new data to MongoDB
 def write_new_data_to_mongodb(data):
     print(fg.li_green + 'Writing new data to database...')
 
@@ -47,7 +48,6 @@ def delete_all_collections():
     print(fg.li_green + 'MONGODB: All collections successfully deleted from the database.')
 
 
-# Deletes old documents. Also deletes a collection if there's no document's in it.
 def delete_old_documents():
     print(fg.li_green + 'MONGODB: Attempting to delete documents older than 7 days...')
 
@@ -60,7 +60,13 @@ def delete_old_documents():
         collection = db[collection_name]
 
         # Find all documents where the msgtime field is older than 3 minutes
-        documents_to_delete = collection.find({"msgtime": {"$lt": three_minutes_ago.strftime("%Y-%m-%dT%H:%M:%S+00:00")}})
+        documents_to_delete = collection.find(
+            {
+                "msgtime": {
+                    "$lt": three_minutes_ago.strftime("%Y-%m-%dT%H:%M:%S+00:00")
+                }
+            }
+        )
 
         # Iterate over the documents and delete them
         for document in documents_to_delete:

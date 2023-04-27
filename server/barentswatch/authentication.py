@@ -1,5 +1,5 @@
 import requests
-from api.credentials import config
+from barentswatch.credentials import config
 
 
 # Obtains an authentication token from the API using the client ID and client secret.

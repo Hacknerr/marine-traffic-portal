@@ -1,15 +1,21 @@
+"""
+This module provides a web server that interacts with a MongoDB database and
+various APIs to provide real-time data to the frontend. It uses Flask,
+Flask-SocketIO, and Flask-CORS for handling web requests and WebSocket
+communication, and it manages tasks with the help of the threading module.
+"""
+
 import time
 import threading
 
+from requests import RequestException
 from database import mongodb
-from api import barentswatch, authentication
+from barentswatch import data_request, authentication
 from flask import Flask, stream_with_context, Response
 from flask_socketio import SocketIO
 from flask_cors import CORS
-
-from sty import fg, bg, ef, rs
+from sty import fg
 from sty import Style, RgbFg
-
 from waitress import serve
 
 fg.orange = Style(RgbFg(255, 150, 50))
@@ -32,6 +38,11 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 # ¤-------------------------Reading data-------------------------¤ #
 
 def polling():
+    """
+    Continuously polls data from the BarentsWatch API, writes the data to MongoDB,
+    and removes old documents. The function runs in an infinite loop and sleeps
+    for 600 seconds between iterations.
+    """
     while True:
         print(fg.orange + 'SERVER: Executing polling...(requesting data from API, writing to DB)')
 
@@ -41,33 +52,42 @@ def polling():
 
         # Requests a list of MMSI numbers for boats in a certain area from the API.
         try:
-            list_of_mmsi = barentswatch.data_request_of_area(token)
-        except Exception as e:
+            list_of_mmsi = data_request.data_request_of_area(token)
+        except RequestException as error:
             # If an error occurs, prints an error message and returns an empty list.
-            print(f"SERVER: Error occurred while requesting MMSI data from the API: {e}")
+            print(f"SERVER: Error occurred while requesting MMSI data from the API: {error}")
             list_of_mmsi = []
 
         # Uses the list of MMSI numbers to fetch boat data from the API.
         try:
-            json_response_with_data = barentswatch.get_data_from_mmsi(token, list_of_mmsi)
-        except Exception as e:
+            json_response_with_data = data_request.get_data_from_mmsi(token, list_of_mmsi)
+        except RequestException as error:
             # If an error occurs, prints an error message and returns an empty list.
-            print(f"SERVER: Error occurred while requesting boat data from the API: {e}")
+            print(f"SERVER: Error occurred while requesting boat data from the API: {error}")
             json_response_with_data = []
 
         # Writes the JSON response with data to the database.
         mongodb.write_new_data_to_mongodb(json_response_with_data)
 
-        # Delete documents from any collection if the "msgtime" field of the document is older than 7 days.
+        # Deletes document from any collection if the "msgtime"
+        # field of the document is older than 7 days.
         mongodb.delete_old_documents()
 
         print(fg.blue + 'SERVER: Polling successfully completed... Sleeping for 600 seconds...')
         time.sleep(600)
 
 
-# Defines a Flask route for server-sent events
 @app.route('/sse')
 def send_data_to_frontend():
+    """
+    Streams data from the MongoDB database to the frontend using server-sent events (SSE).
+    The function generates and sends the data in a continuous loop, sleeping for 30 seconds
+    between each iteration.
+
+    Returns:
+        Response: A Flask Response object with the streaming
+        data and content type set to 'text/event-stream'.
+    """
     print(fg.orange + 'SERVER: Streaming data to frontend...')
 
     # Defines a generator function that will continually yield the latest data from the database
@@ -77,10 +97,12 @@ def send_data_to_frontend():
             # Sends the data to the frontend as a server-sent event,
             # which consists of a data field followed by two newlines
             yield 'data: %s\n\n' % data
-            print(fg.orange + 'SERVER: Data streamed to frontend successfully. Sleeping for 30 seconds...')
+            print(fg.orange + 'SERVER: Data streamed to frontend \
+            successfully. Sleeping for 30 seconds...')
             time.sleep(30)
 
-    # Returns a Flask Response object that uses the generator function to stream data to the frontend
+    # Returns a Flask Response object that uses the generator
+    # function to stream data to the frontend.
     return Response(stream_with_context(generate()), content_type='text/event-stream')
 
 

@@ -2,7 +2,7 @@
 import requests
 import json
 from tools import utilities
-from api.credentials import config
+from barentswatch.credentials import config
 
 
 # Requests and collects the mmsi of all ships in a specific area from the API.
