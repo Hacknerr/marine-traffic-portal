@@ -9,7 +9,6 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from barentswatch import authentication
 from database import mongodb
 from server import app, polling
 
@@ -25,7 +24,6 @@ def mock_dependencies():
     mongodb.delete_old_documents = MagicMock()
     mongodb.delete_all_collections = MagicMock()
     mongodb.read_latest_data_from_database = MagicMock()
-    authentication.get_token = MagicMock()
 
 
 @pytest.mark.usefixtures("mock_dependencies")
