@@ -30,9 +30,9 @@ jobs:
     - name: Run pytest
       uses: pavelzw/pytest-action@v2.1.0
       with:
-        job-summary: true
+        job-summary: false
         verbose: true
-        emoji: true
+        emoji: false
         custom-arguments: ""
         custom-pytest: "python -m pytest server"
         report-title: "Test Report"
