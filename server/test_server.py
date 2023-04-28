@@ -1,8 +1,17 @@
-import pytest
+"""
+Test module for marine-traffic-portal application.
+
+This module contains test cases for the server functionality, including
+the polling function and the send_data_to_frontend function. It uses pytest
+and MagicMock to mock external dependencies for testing purposes.
+"""
 from unittest.mock import MagicMock
-from database import mongodb
+
+import pytest
+
 from barentswatch import data_request, authentication
-from server import app, polling, send_data_to_frontend
+from database import mongodb
+from server import app, polling
 
 # To mock external dependencies
 app.config['TESTING'] = True
