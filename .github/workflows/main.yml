@@ -28,9 +28,9 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run pytest
-      working-directory: server
       uses: pavelzw/pytest-action@v2.1.0
       with:
+        working-directory: server
         job-summary: true
         verbose: true
         emoji: true
