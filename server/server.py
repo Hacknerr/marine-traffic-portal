@@ -36,13 +36,14 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 # ¤-------------------------Reading data-------------------------¤ #
 
-def polling():
+def polling(num_iterations=None, sleep_time=600):
     """
     Continuously polls data from the BarentsWatch API, writes the data to MongoDB,
     and removes old documents. The function runs in an infinite loop and sleeps
     for 600 seconds between iterations.
     """
-    while True:
+    iterations = 0
+    while num_iterations is None or iterations < num_iterations:
         print(fg.orange + 'SERVER: Executing polling...(requesting data from API, writing to DB)')
 
         # Collects authentication token for BarentsWatch API.
@@ -73,7 +74,8 @@ def polling():
         mongodb.delete_old_documents()
 
         print(fg.blue + 'SERVER: Polling successfully completed... Sleeping for 600 seconds...')
-        time.sleep(600)
+        time.sleep(sleep_time)
+        iterations += 1
 
 
 @app.route('/sse')
@@ -113,7 +115,7 @@ if __name__ == "__main__":
     mongodb.delete_all_collections()
 
     # Create a thread for polling
-    polling_thread = threading.Thread(target=polling)
+    polling_thread = threading.Thread(target=polling, args=(None, 600))
 
     # Start the polling thread
     polling_thread.start()
