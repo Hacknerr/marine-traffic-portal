@@ -88,14 +88,15 @@ def send_data_to_frontend():
     """
     print(fg.orange + 'SERVER: Streaming data to frontend...')
 
-    # Defines a generator function that will continually yield the latest data from the database
+    # Defines a generator function that will continually yield the latest data from the database.
     def generate():
         while True:
             data = mongodb.read_latest_data_from_database()
             # Sends the data to the frontend as a server-sent event,
             # which consists of a data field followed by two newlines
             yield 'data: %s\n\n' % data
-            print(fg.orange + 'SERVER: Data streamed to frontend successfully. Sleeping for 30 seconds...')
+            print(fg.orange + 'SERVER: Data streamed to frontend '
+                              'successfully. Sleeping for 30 seconds...')
             time.sleep(30)
 
     # Returns a Flask Response object that uses the generator
@@ -105,16 +106,16 @@ def send_data_to_frontend():
 
 # ¤-------------------------Startup-------------------------¤ #
 
-# The main function that starts the application
+# The main function that starts the application.
 if __name__ == "__main__":
     # Remove these lines of code when development is finished.
     mongodb.delete_all_collections()
 
-    # Create a thread for polling
+    # Create a thread for polling.
     polling_thread = threading.Thread(target=polling, args=(None, 600))
 
-    # Start the polling thread
+    # Start the polling thread.
     polling_thread.start()
 
-    # Start the Waitress server in the main thread
+    # Start the Waitress server in the main thread.
     serve(app, host='0.0.0.0', port=5000, threads=4)
