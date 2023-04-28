@@ -34,6 +34,6 @@ jobs:
         verbose: true
         emoji: true
         custom-arguments: ""
-        custom-pytest: "python -m pytest server"
+        custom-pytest: "python -m pytest server --md=report.md --emoji"
         report-title: "Test Report"
         click-to-expand: true
