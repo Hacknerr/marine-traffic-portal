@@ -13,7 +13,7 @@ from barentswatch import data_request, authentication
 from database import mongodb
 from server import app, polling
 
-# To mock external dependencies
+# To mock external dependencies.
 app.config['TESTING'] = True
 client = app.test_client()
 
