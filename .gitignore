@@ -139,7 +139,7 @@ dmypy.json
 **/[Kk]ey*
 
 # Api
-**/[Cc]redentials*
+**/credentials.txt
 
 # Map
 map.html
