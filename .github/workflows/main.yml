@@ -22,11 +22,13 @@ jobs:
         python-version: 3.8
 
     - name: Install dependencies
+      working-directory: server
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
     - name: Run pytest
+      working-directory: server
       uses: pavelzw/pytest-action@v2.1.0
       with:
         job-summary: true
