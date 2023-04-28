@@ -12,7 +12,6 @@ from requests import RequestException
 from database import mongodb
 from barentswatch import data_request, authentication
 from flask import Flask, stream_with_context, Response
-from flask_socketio import SocketIO
 from flask_cors import CORS
 from sty import fg
 from sty import Style, RgbFg
@@ -30,9 +29,6 @@ app.config['SECRET_KEY'] = 'secret!123456789!'
 
 # Enables Cross-Origin Resource Sharing (CORS) for the Flask application.
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
-
-# Creates a new Socket.IO server that is integrated with the Flask application.
-socketio = SocketIO(app, cors_allowed_origins="*")
 
 
 # ¤-------------------------Reading data-------------------------¤ #
@@ -99,8 +95,7 @@ def send_data_to_frontend():
             # Sends the data to the frontend as a server-sent event,
             # which consists of a data field followed by two newlines
             yield 'data: %s\n\n' % data
-            print(fg.orange + 'SERVER: Data streamed to frontend \
-            successfully. Sleeping for 30 seconds...')
+            print(fg.orange + 'SERVER: Data streamed to frontend successfully. Sleeping for 30 seconds...')
             time.sleep(30)
 
     # Returns a Flask Response object that uses the generator
