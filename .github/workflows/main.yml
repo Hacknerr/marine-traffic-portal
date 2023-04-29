@@ -36,5 +36,7 @@ jobs:
 
     - name: Run tests
       working-directory: server
+      env:
+        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
       run: |
         pytest
