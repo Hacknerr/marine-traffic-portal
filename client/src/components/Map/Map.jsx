@@ -13,7 +13,7 @@ import 'leaflet-fullscreen/dist/leaflet.fullscreen.css';
 
 import { ZoomControl } from 'react-leaflet';
 
-function FullscreenInfoBox( {darkMode}) {
+export function FullscreenInfoBox({darkMode}) {
   const map = useMap();
   const currentTime = new Date();
 
@@ -54,7 +54,7 @@ function isMobileDevice() {
   return window.innerWidth <= 768;
 }
 
-function FullscreenControl() {
+export function FullscreenControl() {
   const map = useMap();
 
   useEffect(() => {
@@ -65,7 +65,7 @@ function FullscreenControl() {
 }
 
 // Set zoom on carousel start
-function SetZoomOnCarouselActive({ isActive }) {
+export function SetZoomOnCarouselActive({ isActive }) {
   const map = useMap();
 
   useEffect(() => {
@@ -80,12 +80,12 @@ function SetZoomOnCarouselActive({ isActive }) {
 }
 
 // Takes a 'position' prop and renders a ZoomControl component with the given position
-function CustomZoomControl({ position }) {
+export function CustomZoomControl({ position }) {
   return <ZoomControl position={position} />;
 }
 
 // Takes a 'position' prop and renders a CustomZoomControl component only if the map is not in fullscreen mode.
-function ConditionalZoomControl({ position }) {
+export function ConditionalZoomControl({ position }) {
   const map = useMap();
 
   // Checks if the map is not in fullscreen mode
