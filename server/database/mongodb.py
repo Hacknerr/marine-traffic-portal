@@ -1,8 +1,14 @@
+"""
+This module provides functions to read and write data from and to
+a MongoDB database. The module uses the PyMongo driver to
+interact with the MongoDB database.
+"""
+
 import json
 import datetime
 import pymongo
 
-from sty import fg, bg, ef, rs
+from sty import fg
 
 # Initializes the connection to a local MongoDB instance.
 # client = pymongo.MongoClient("mongodb://mongodb:27017/", w='majority')
@@ -10,15 +16,19 @@ client = pymongo.MongoClient("mongodb://localhost:27017/", w='majority')
 db = client.get_database("mydatabase")
 
 
-# Write new data to MongoDB
 def write_new_data_to_mongodb(data):
+    """
+    This function writes a list of JSON objects to MongoDB by using the
+    MMSI value of each JSON object as the collection name. If the
+    collection does not exist, it creates it. Finally, it writes
+    the JSON object to the MongoDB database.
+    """
     print(fg.li_green + 'Writing new data to database...')
 
     # Iterate through the list of JSON objects.
     for item in data:
         # Use the MMSI value of the JSON object as the collection name.
         collection_name = str(list(item.values())[8])
-        timestamp = list(item.values())[9]
 
         # Get the collection object, creating it if it does not exist.
         collection = db.get_collection(collection_name)
@@ -34,8 +44,11 @@ def write_new_data_to_mongodb(data):
     print(fg.li_green + 'MONGODB: All collections successfully written to the database.')
 
 
-# Deletes all collections and their associated documents from MongoDB.
 def delete_all_collections():
+    """
+    This function deletes all collections from the MongoDB
+    database by iterating over each collection and dropping it.
+    """
     print(fg.li_green + 'MONGODB: Deleting all collections from the database...')
 
     # Gets a list of all collections in the MongoDB database.
@@ -49,6 +62,9 @@ def delete_all_collections():
 
 
 def delete_old_documents():
+    """
+    Deletes documents that are older than 7 days from all collections in MongoDB.
+    """
     print(fg.li_green + 'MONGODB: Attempting to delete documents older than 7 days...')
 
     # Calculate the datetime that was 3 minutes ago
@@ -71,7 +87,8 @@ def delete_old_documents():
         # Iterate over the documents and delete them
         for document in documents_to_delete:
             collection.delete_one({"_id": document["_id"]})
-            print(f"MONGODB: Deleted document from collection {collection_name} with msgtime {document['msgtime']}.")
+            print(f"MONGODB: Deleted document from collection {collection_name} with "
+                  f"msgtime {document['msgtime']}.")
 
         # Check if the collection is empty
         if collection.count_documents({}) == 0:
@@ -81,9 +98,12 @@ def delete_old_documents():
     print(fg.li_green + 'MONGODB: Deleted old documents from all collections.')
 
 
-# Retrieves all collections and their associated documents from MongoDB
-# and returns them as a list of dictionaries.
 def read_latest_data_from_database():
+    """
+    This function reads the latest data from the MongoDB database,
+    removing the ObjectId field from each document, and returns
+    the data as a JSON object.
+    """
     print(fg.li_green + 'MONGODB: Reading latests data from database...')
 
     documents = []
@@ -93,7 +113,8 @@ def read_latest_data_from_database():
 
     # Iterates through the collections and retrieves the document with the most recent datetime.
     for collection_name in collections:
-        # Gets the most recent document from the collection, sorted by "msgtime" field in descending order.
+        # Retrieves the most recent document from the collection, sorted by
+        # "msgtime" in descending order.
         collection = db[collection_name]
         data = collection.find_one(sort=[("msgtime", pymongo.DESCENDING)])
 
@@ -101,7 +122,8 @@ def read_latest_data_from_database():
             # Remove the ObjectId field from the document
             data.pop("_id", None)
             documents.append(data)
-            print(f"MONGODB: Reading collection {collection_name}, document with msgtime {data['msgtime']}.")
+            print(f"MONGODB: Reading collection {collection_name}, "
+                  f"document with msgtime {data['msgtime']}.")
         else:
             print(f"MONGODB: Collection {collection_name} is empty.")
 
@@ -109,4 +131,3 @@ def read_latest_data_from_database():
 
     json_with_boat_data = json.dumps(documents)
     return json_with_boat_data
-
