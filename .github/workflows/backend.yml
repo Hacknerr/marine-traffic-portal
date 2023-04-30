@@ -1,4 +1,4 @@
-name: Backend Testing
+name: Backend Python CI Testing
 
 on:
   push:
