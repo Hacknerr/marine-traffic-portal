@@ -1,5 +1,6 @@
 import os
 
+
 def get_secret_from_file(key, fallback=None):
     this_dir = os.path.dirname(os.path.abspath(__file__))
     secrets_file = os.path.join(this_dir, 'secrets.txt')
@@ -8,6 +9,7 @@ def get_secret_from_file(key, fallback=None):
             secrets = dict(line.strip().split('=', 1) for line in f if line.strip())
         return secrets.get(key, fallback)
     return fallback
+
 
 config = {
     'client_id': 'andrgart@stud.ntnu.no:ais-api-client',
