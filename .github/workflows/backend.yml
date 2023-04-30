@@ -34,12 +34,12 @@ jobs:
       run: |
         pip install pytest pylint
 
-    - name: Run pylint
+    - name: Run PyLint
       working-directory: server
       run: |
         pylint --exit-zero **/*.py
 
-    - name: Run tests
+    - name: Run PyTest
       working-directory: server
       env:
         CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
