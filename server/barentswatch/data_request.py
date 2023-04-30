@@ -1,14 +1,17 @@
-
-import requests
+"""
+This module contains functions for retrieving ship data from BarentsWatch APIs.
+"""
 import json
+import requests
 from tools import utilities
 from barentswatch import credentials
 
 
-# Requests and collects the mmsi of all ships in a specific area from the API.
 def data_request_of_area(token):
-
-    # Defines the API endpoint for fetching mmsi in a specific area.
+    """
+    Fetches data about mmsi in a specific area from a RESTful API endpoint.
+    """
+    # Defines the API endpoint for fetching mmsi from a specific area.
     url = f"{credentials.config['api_historic_base_url']}/v1/historic/mmsiinarea"
 
     print(url)
@@ -25,160 +28,69 @@ def data_request_of_area(token):
     print(two_hours_ago)
     print(now)
 
-    # Defines the data structure necessary for tracking a geographical area.
-    # The data structure contains a time range and a polygon that defines the geographical area.
-    data_raw_old = {
+    data_raw = {
         "msgtimefrom": two_hours_ago,
         "msgtimeto": now,
         "polygon": {
             "coordinates": [
                 [
                     [
-                        10.6030045092038,
-                        63.29961299403715
+                        10.359286605583947,
+                        63.419130867795786
                     ],
                     [
-                        11.073060510455235,
-                        63.30242896215148
+                        10.391560425183059,
+                        63.41586975271488
                     ],
                     [
-                        11.424035658055743,
-                        63.48487755288576
+                        10.435286245285766,
+                        63.42472048783199
                     ],
                     [
-                        11.712336672156425,
-                        63.73281604842941
+                        10.47953261086667,
+                        63.43473249809645
                     ],
                     [
-                        11.712336672156425,
-                        63.87944008236926
+                        10.507121521169267,
+                        63.449394941119806
                     ],
                     [
-                        11.411500831355767,
-                        63.901505812735934
+                        10.501395520917413,
+                        63.464980097690756
                     ],
                     [
-                        10.979049310204175,
-                        63.862879402934055
+                        10.491505156847296,
+                        63.4882257431112
                     ],
                     [
-                        10.70955053615387,
-                        63.77439082776135
+                        10.453505336995107,
+                        63.500073747690436
                     ],
                     [
-                        10.358575388552424,
-                        63.66894913265969
+                        10.412382244279826,
+                        63.51354197957528
                     ],
                     [
-                        10.082809201151662,
-                        63.607724135195525
+                        10.363971514880518,
+                        63.50936286319026
                     ],
                     [
-                        9.93865869410078,
-                        63.66894913265969
+                        10.301506057590217,
+                        63.49171096032066
                     ],
                     [
-                        9.838380080501224,
-                        63.680066771990056
+                        10.267670601558962,
+                        63.46428243634642
                     ],
                     [
-                        9.694229573450372,
-                        63.64113595368673
-                    ],
-                    [
-                        9.606485786549769,
-                        63.57706210328345
-                    ],
-                    [
-                        9.568881303804716,
-                        63.43727219262129
-                    ],
-                    [
-                        9.713031810855426,
-                        63.29971709814515
-                    ],
-                    [
-                        9.957460931505835,
-                        63.22640553869957
-                    ],
-                    [
-                        10.270831599006499,
-                        63.28281557065367
-                    ],
-                    [
-                        10.6030045092038,
-                        63.29961299403715
+                        10.359286605583947,
+                        63.419130867795786
                     ]
                 ]
             ],
             "type": "Polygon"
         }
     }
-
-    data_raw = {
-        "msgtimefrom": two_hours_ago,
-        "msgtimeto": now,
-        "polygon": {
-            "coordinates": [
-          [
-            [
-              10.359286605583947,
-              63.419130867795786
-            ],
-            [
-              10.391560425183059,
-              63.41586975271488
-            ],
-            [
-              10.435286245285766,
-              63.42472048783199
-            ],
-            [
-              10.47953261086667,
-              63.43473249809645
-            ],
-            [
-              10.507121521169267,
-              63.449394941119806
-            ],
-            [
-              10.501395520917413,
-              63.464980097690756
-            ],
-            [
-              10.491505156847296,
-              63.4882257431112
-            ],
-            [
-              10.453505336995107,
-              63.500073747690436
-            ],
-            [
-              10.412382244279826,
-              63.51354197957528
-            ],
-            [
-              10.363971514880518,
-              63.50936286319026
-            ],
-            [
-              10.301506057590217,
-              63.49171096032066
-            ],
-            [
-              10.267670601558962,
-              63.46428243634642
-            ],
-            [
-              10.359286605583947,
-              63.419130867795786
-            ]
-          ]
-        ],
-        "type": "Polygon"
-      }
-    }
-
 
     # Attempts to make the API request and return the response data.
     try:
@@ -201,11 +113,10 @@ def data_request_of_area(token):
         print("Error: " + str(err))
 
 
-# Retrieves the latest data of all ships.
-# The token parameter is a dictionary containing the API access token for authorization.
-# list parameter is a list of MMSI numbers representing the ships for which to retrieve data.
 def get_data_from_mmsi(token, mmsi_list):
-
+    """
+    Retrieves the latest data of all ships based on MMSI numbers.
+    """
     # Defines the API endpoint for retrieving the latest ship data.
     url = f"{credentials.config['api_base_url']}/v1/latest/combined"
 
