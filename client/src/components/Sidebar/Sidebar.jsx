@@ -104,7 +104,7 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
 );
 
 // Sidebar component that appears on the left-hand side of the application
-export default function Sidebar( {} ) {
+export default function Sidebar() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const [infoPopoverOpen, setInfoPopoverOpen] = React.useState(false); // Info popup
