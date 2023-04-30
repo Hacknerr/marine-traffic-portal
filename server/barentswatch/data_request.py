@@ -2,14 +2,14 @@
 import requests
 import json
 from tools import utilities
-from credentials import config
+from barentswatch import credentials
 
 
 # Requests and collects the mmsi of all ships in a specific area from the API.
 def data_request_of_area(token):
 
     # Defines the API endpoint for fetching mmsi in a specific area.
-    url = f"{config['api_historic_base_url']}/v1/historic/mmsiinarea"
+    url = f"{credentials.config['api_historic_base_url']}/v1/historic/mmsiinarea"
 
     print(url)
 
@@ -207,7 +207,7 @@ def data_request_of_area(token):
 def get_data_from_mmsi(token, mmsi_list):
 
     # Defines the API endpoint for retrieving the latest ship data.
-    url = f"{config['api_base_url']}/v1/latest/combined"
+    url = f"{credentials.config['api_base_url']}/v1/latest/combined"
 
     # Sets the necessary headers for the API request.
     headers = {
