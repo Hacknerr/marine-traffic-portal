@@ -18,8 +18,8 @@ def data_request_of_area(token):
 
     # Defines the required headers for making the API request.
     headers = {
-        'authorization': 'Bearer ' + token['access_token'],
-        'content-type': 'application/json',
+        "authorization": "Bearer " + token["access_token"],
+        "content-type": "application/json",
     }
 
     two_hours_ago = utilities.get_datetime_2_hours_ago()
@@ -31,62 +31,23 @@ def data_request_of_area(token):
         "polygon": {
             "coordinates": [
                 [
-                    [
-                        10.359286605583947,
-                        63.419130867795786
-                    ],
-                    [
-                        10.391560425183059,
-                        63.41586975271488
-                    ],
-                    [
-                        10.435286245285766,
-                        63.42472048783199
-                    ],
-                    [
-                        10.47953261086667,
-                        63.43473249809645
-                    ],
-                    [
-                        10.507121521169267,
-                        63.449394941119806
-                    ],
-                    [
-                        10.501395520917413,
-                        63.464980097690756
-                    ],
-                    [
-                        10.491505156847296,
-                        63.4882257431112
-                    ],
-                    [
-                        10.453505336995107,
-                        63.500073747690436
-                    ],
-                    [
-                        10.412382244279826,
-                        63.51354197957528
-                    ],
-                    [
-                        10.363971514880518,
-                        63.50936286319026
-                    ],
-                    [
-                        10.301506057590217,
-                        63.49171096032066
-                    ],
-                    [
-                        10.267670601558962,
-                        63.46428243634642
-                    ],
-                    [
-                        10.359286605583947,
-                        63.419130867795786
-                    ]
+                    [10.359286605583947, 63.419130867795786],
+                    [10.391560425183059, 63.41586975271488],
+                    [10.435286245285766, 63.42472048783199],
+                    [10.47953261086667, 63.43473249809645],
+                    [10.507121521169267, 63.449394941119806],
+                    [10.501395520917413, 63.464980097690756],
+                    [10.491505156847296, 63.4882257431112],
+                    [10.453505336995107, 63.500073747690436],
+                    [10.412382244279826, 63.51354197957528],
+                    [10.363971514880518, 63.50936286319026],
+                    [10.301506057590217, 63.49171096032066],
+                    [10.267670601558962, 63.46428243634642],
+                    [10.359286605583947, 63.419130867795786],
                 ]
             ],
-            "type": "Polygon"
-        }
+            "type": "Polygon",
+        },
     }
 
     # Attempts to make the API request and return the response data.
@@ -119,14 +80,12 @@ def get_data_from_mmsi(token, mmsi_list):
 
     # Sets the necessary headers for the API request.
     headers = {
-        'authorization': 'Bearer ' + token['access_token'],
-        'content-type': 'application/json',
+        "authorization": "Bearer " + token["access_token"],
+        "content-type": "application/json",
     }
 
     # Packages the list of MMSI numbers into the API request payload.
-    data = {
-        'mmsi': mmsi_list
-    }
+    data = {"mmsi": mmsi_list}
 
     # Makes the API request and check for errors.
     response = requests.post(url, headers=headers, json=data)

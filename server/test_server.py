@@ -14,7 +14,7 @@ from database import mongodb
 from server import app, polling
 
 # To mock external dependencies.
-app.config['TESTING'] = True
+app.config["TESTING"] = True
 client = app.test_client()
 
 
@@ -41,6 +41,6 @@ def test_polling():
 # pylint: disable=unused-argument
 def test_send_data_to_frontend():
     """Test the send_data_to_frontend function with mocked dependencies."""
-    response = client.get('/sse')
+    response = client.get("/sse")
     assert response.status_code == 200
-    assert response.content_type == 'text/event-stream'
+    assert response.content_type == "text/event-stream"

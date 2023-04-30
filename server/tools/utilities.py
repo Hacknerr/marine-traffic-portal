@@ -47,5 +47,6 @@ def format_datetime(date_time: datetime) -> str:
     Formats a datetime object to a string in "YYYY-MM-DDTHH:MM:SS+00:00" format,
     which is commonly used in datetime strings for APIs, databases and other applications.
     """
-    # Using the strftime method, the datetime object is formatted according to the string pattern specified.
+    # Using the strftime method, the datetime object is formatted
+    # according to the string pattern specified.
     return date_time.strftime("%Y-%m-%dT%H:%M:%S+00:00")
