@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
@@ -59,20 +60,6 @@ function FullscreenControl() {
   useEffect(() => {
     map.addControl(new L.Control.Fullscreen());
   }, [map]);
-
-  return null;
-}
-
-// Carousel
-function PanToMarker({ position, isActive }) {
-  const map = useMap();
-  const positionWithOffset = [position[0] + 0.005, position[1]];
-
-  useEffect(() => {
-    if (isActive) {
-      // map.flyTo(positionWithOffset, 15);
-    }
-  }, [position, isActive]);
 
   return null;
 }
@@ -450,9 +437,6 @@ function getShipTypeText(shipTypeNumber) {
           {markers}
           <FullscreenControl />
           <FullscreenInfoBox darkMode={darkMode} />
-          {markers.length > 0 && (
-          <PanToMarker position={[ships[activeMarkerIndex].latitude, ships[activeMarkerIndex].longitude]} isActive={isCarouselActive} />
-        )}
           <SetZoomOnCarouselActive isActive={isCarouselActive} />
           <ConditionalZoomControl position="bottomright" />
         </MapContainer>

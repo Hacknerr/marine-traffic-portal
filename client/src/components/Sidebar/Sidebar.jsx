@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import {styled, useTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -103,7 +104,7 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
 );
 
 // Sidebar component that appears on the left-hand side of the application
-export default function Sidebar( {onLoopIconClick} ) {
+export default function Sidebar( {} ) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const [infoPopoverOpen, setInfoPopoverOpen] = React.useState(false); // Info popup
