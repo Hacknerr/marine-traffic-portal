@@ -30,9 +30,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Install pytest
+    - name: Install testing tools
       run: |
-        pip install pytest
+        pip install pytest pylint
+
+    - name: Run pylint
+      working-directory: server
+      run: |
+        pylint **/*.py
 
     - name: Run tests
       working-directory: server
