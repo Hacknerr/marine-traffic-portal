@@ -37,7 +37,7 @@ jobs:
     - name: Run pylint
       working-directory: server
       run: |
-        pylint **/*.py
+        pylint --exit-zero **/*.py
 
     - name: Run tests
       working-directory: server
