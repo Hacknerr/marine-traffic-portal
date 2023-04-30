@@ -341,7 +341,7 @@ function getShipTypeText(shipTypeNumber) {
   }, []);
 
   const boatIcon = new L.Icon({
-    iconUrl: '/boat-icon.png',
+    iconUrl: darkMode ? '/boat-icon-white.png' : '/boat-icon.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
