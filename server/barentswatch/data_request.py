@@ -23,10 +23,7 @@ def data_request_of_area(token):
     }
 
     two_hours_ago = utilities.get_datetime_2_hours_ago()
-    now = utilities.getCurrentTime()
-
-    print(two_hours_ago)
-    print(now)
+    now = utilities.get_current_time()
 
     data_raw = {
         "msgtimefrom": two_hours_ago,
