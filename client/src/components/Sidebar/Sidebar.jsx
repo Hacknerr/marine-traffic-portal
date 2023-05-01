@@ -66,7 +66,9 @@ const DrawerHeader = styled('div')(({theme}) => ({
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open' && prop !== 'darkMode',
 })(({theme, open, darkMode}) => ({
-    background: `linear-gradient(to right, #8F00E3, #5A0196)`, // Color of the navbar
+    background: darkMode
+      ? `linear-gradient(to right, #8F00E3, #480178)` // Color of the navbar when in dark mode
+      : `linear-gradient(to right, #8F00E3, #5A0196)`,
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
