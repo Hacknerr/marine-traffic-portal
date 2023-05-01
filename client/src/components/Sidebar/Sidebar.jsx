@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
-import {styled, useTheme} from '@mui/material/styles';
+import {styled, useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
@@ -23,7 +23,6 @@ import CopyrightIcon from '@mui/icons-material/Copyright';
 import DarkModeTwoToneIcon from '@mui/icons-material/DarkModeTwoTone';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import Popover from '@mui/material/Popover';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Map from "../Map/Map.jsx";
 import { useState, useEffect } from 'react';
 import {Tooltip} from "@mui/material";
@@ -67,9 +66,7 @@ const DrawerHeader = styled('div')(({theme}) => ({
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open' && prop !== 'darkMode',
 })(({theme, open, darkMode}) => ({
-    background: darkMode
-      ? `linear-gradient(to right, #8F00E3, #5A0196)` // Color of the navbar when in dark mode
-      : `linear-gradient(to right, #8F00E3, #5A0196)`,
+    background: `linear-gradient(to right, #8F00E3, #5A0196)`, // Color of the navbar
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
