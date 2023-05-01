@@ -27,4 +27,4 @@ jobs:
         with:
           context: ./server
           push: true
-          tags: your-docker-hub-username/backend:latest
+          tags: hackner/backend-docker-image-ci:latest
