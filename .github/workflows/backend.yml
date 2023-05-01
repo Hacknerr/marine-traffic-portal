@@ -2,16 +2,15 @@ name: Backend Python CI Testing
 
 on:
   push:
-    branches:
-      - merged-branches
+    branches: [ "merged-branches" ]
   pull_request:
-    branches:
-      - merged-branches
+    branches: [ "merged-branches" ]
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         python-version: [3.7, 3.8, 3.9]
