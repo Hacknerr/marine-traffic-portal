@@ -105,24 +105,6 @@ function getShipTypeText(shipTypeNumber) {
   switch (shipTypeNumber) {
     case 0:
     return 'Ikke tilgjengelig (standard)';
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
-    case 12:
-    case 13:
-    case 14:
-    case 15:
-    case 16:
-    case 17:
-    case 18:
     case 19:
     return 'Reservert for fremtidig bruk';
     case 20:
@@ -135,10 +117,6 @@ function getShipTypeText(shipTypeNumber) {
     return 'Vinge i sjøen (WIG), Farlig kategori C';
     case 24:
     return 'Vinge i sjøen (WIG), Farlig kategori D';
-    case 25:
-    case 26:
-    case 27:
-    case 28:
     case 29:
     return 'Vinge i sjøen (WIG)';
     case 30:
@@ -170,9 +148,6 @@ function getShipTypeText(shipTypeNumber) {
     return 'Høyhastighetsfartøy, Farlig kategori C';
     case 44:
     return 'Høyhastighetsfartøy, Farlig kategori D';
-    case 45:
-    case 46:
-    case 47:
     case 48:
     return 'Høyhastighetsfartøy';
     case 49:
@@ -206,9 +181,6 @@ function getShipTypeText(shipTypeNumber) {
     return 'Passasjer, Farlig kategori C';
     case 64:
     return 'Passasjer, Farlig kategori D';
-    case 65:
-    case 66:
-    case 67:
     case 68:
     return 'Passasjer';
     case 69:
@@ -223,9 +195,6 @@ function getShipTypeText(shipTypeNumber) {
     return 'Last, Farlig kategori C';
     case 74:
     return 'Last, Farlig kategori D';
-    case 75:
-    case 76:
-    case 77:
     case 78:
     return 'Last';
     case 79:
@@ -240,9 +209,6 @@ function getShipTypeText(shipTypeNumber) {
     return 'Tanker, Farlig kategori C';
     case 84:
     return 'Tanker, Farlig kategori D';
-    case 85:
-    case 86:
-    case 87:
     case 88:
     return 'Tanker';
     case 89:
@@ -257,9 +223,6 @@ function getShipTypeText(shipTypeNumber) {
     return 'Annen type, Farlig kategori C';
     case 94:
     return 'Annen type, Farlig kategori D';
-    case 95:
-    case 96:
-    case 97:
     case 98:
     return 'Annen type';
     case 99:
