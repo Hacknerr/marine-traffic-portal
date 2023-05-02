@@ -11,8 +11,8 @@ import pymongo
 from sty import fg
 
 # Initializes the connection to a local MongoDB instance.
-client = pymongo.MongoClient("mongodb://mongodb:27017/", w='majority')
-# client = pymongo.MongoClient("mongodb://localhost:27017/", w="majority")
+# client = pymongo.MongoClient("mongodb://mongodb:27017/", w='majority')
+client = pymongo.MongoClient("mongodb://localhost:27017/", w="majority")
 db = client.get_database("mydatabase")
 
 
