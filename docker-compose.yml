@@ -3,6 +3,7 @@ version: '3.8'
 services:
   backend:
     build: ./server
+    image: hackner/backend:latest
     depends_on:
       - mongodb
     ports:
@@ -12,6 +13,7 @@ services:
 
   frontend:
     build: ./client
+    image: hackner/frontend:latest
     ports:
       - '80:80'
     networks:
