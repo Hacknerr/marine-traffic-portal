@@ -267,7 +267,7 @@ function getShipTypeText(shipTypeNumber) {
 
   // Sets up event source for Server-Sent Events (SSE) and handles incoming data
   useEffect(() => {
-   const eventSource = new EventSource('PUBLIC_IP:5000/sse');
+   const eventSource = new EventSource('http://PUBLIC_IP:5000/sse');
 
     // When a new message is received from SSE, update the state of the ships
     eventSource.onmessage = (event) => {
