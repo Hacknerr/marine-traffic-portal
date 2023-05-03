@@ -267,7 +267,7 @@ function getShipTypeText(shipTypeNumber) {
 
   // Sets up event source for Server-Sent Events (SSE) and handles incoming data
   useEffect(() => {
-   const eventSource = new EventSource('http://PUBLIC_IP:5000/sse');
+   const eventSource = new EventSource('http://localhost:5000/sse');
 
     // When a new message is received from SSE, update the state of the ships
     eventSource.onmessage = (event) => {
@@ -341,7 +341,13 @@ function getShipTypeText(shipTypeNumber) {
             key={`${ship.mmsi}-${isCarouselActive}`}
             className={darkMode ? 'custom-popup-darkmode' : 'custom-popup'}
             autoPan={isCarouselActive}
-            autoPanPadding={isMobileDevice() ? L.point(20, 200) : L.point(300, 200)}
+            autoPanPadding={
+              isMobileDevice()
+                ? L.point(20, 200)
+                : window.innerWidth >= 1280 && window.innerWidth <= 1440
+                ? L.point(300, 50)
+                : L.point(300, 200)
+            }
         >
           <div>
             <h2>{ship.name ? ship.name : 'Ukjent'}</h2>
