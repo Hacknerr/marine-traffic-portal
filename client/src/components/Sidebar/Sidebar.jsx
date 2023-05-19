@@ -348,7 +348,7 @@ export default function Sidebar() {
                                 fontSize: "18px",
                                 fontWeight: "bold",
                             }}>
-                                Copyright © 2023 Martin Stene, André Gärtner, Accenture og NTNU. Alle rettigheter forbeholdt.
+                                Copyright © 2023 Alle rettigheter forbeholdt.
                             </p>
                             <p style={{
                                 fontSize: "14px",
