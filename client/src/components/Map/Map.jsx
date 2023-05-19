@@ -389,7 +389,7 @@ function getShipTypeText(shipTypeNumber) {
             minZoom={5}
             attributionControl={false}
         >
-          <TileLayer url={darkMode ? "https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png" : "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"} />
+          <TileLayer url={darkMode ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png" : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png{z}/{x}/{y}{r}.png"} />
           {markers}
           <FullscreenControl />
           <FullscreenInfoBox darkMode={darkMode} />
