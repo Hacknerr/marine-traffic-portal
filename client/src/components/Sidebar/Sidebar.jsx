@@ -348,12 +348,12 @@ export default function Sidebar() {
                                 fontSize: "18px",
                                 fontWeight: "bold",
                             }}>
-                                Copyright © 2023 Alle rettigheter forbeholdt.
+                                Copyright © 2023 Accenture. Alle rettigheter forbeholdt.
                             </p>
                             <p style={{
                                 fontSize: "14px",
                             }}>
-                                Denne nettapplikasjonen, inkludert design, kode, funksjonalitet og innhold, er den eksklusive eiendommen til Martin Stene, André Gärtner, Accenture og Norges teknisk-naturvitenskapelige universitet (NTNU). Uautorisert kopiering, reproduksjon, distribusjon, modifikasjon, visning eller bruk av noen del av denne nettapplikasjonen er strengt forbudt uten uttrykkelig skriftlig samtykke fra opphavsrettsinnehaverne.
+                                Denne nettapplikasjonen, inkludert design, kode, funksjonalitet og innhold, er den eksklusive eiendommen til Accenture. Uautorisert kopiering, reproduksjon, distribusjon, modifikasjon, visning eller bruk av noen del av denne nettapplikasjonen er strengt forbudt uten uttrykkelig skriftlig samtykke fra opphavsrettsinnehaverne.
                             </p>
                         </Typography>
                     </Box>
